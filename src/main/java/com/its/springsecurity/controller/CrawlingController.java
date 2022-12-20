@@ -1,5 +1,6 @@
 package com.its.springsecurity.controller;
 
+import com.its.springsecurity.dto.CrawlingDTO;
 import com.its.springsecurity.service.CrawlingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,8 @@ public class CrawlingController {
 
     @GetMapping("/craw")
     public String craw(Model model) throws IOException {
-        List<> = crawlingService.craw();
-        model.addAttribute("craw",crawlingDTO);
+        List<CrawlingDTO> crawlList = crawlingService.craw();
+        model.addAttribute("craw",crawlList);
         return "crawling";
     }
 

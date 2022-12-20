@@ -1,20 +1,47 @@
 package com.its.springsecurity.dto;
 
+import com.its.springsecurity.entity.CrawlingEntity;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Builder
+@Setter
 @ToString
 public class CrawlingDTO {
+    private Long id;
     private String image;
     private String name;
-    private String subject;
+
     private String team;
 
     private String lose;
 
     private String win;
+
+    private String draw;
     private String url;
+
+    private int fileAttached;
+
+    public static CrawlingDTO coDTO(CrawlingEntity crawlingEntity){]
+    CrawlingDTO crawlingDTO = new CrawlingDTO();
+    crawlingDTO.setId(crawlingEntity.getId());
+    crawlingDTO.setName(crawlingEntity.getName());
+    crawlingDTO.setTeam(crawlingEntity.getTeam());
+    crawlingDTO.setWin(crawlingEntity.getWin());
+    crawlingDTO.setLose(crawlingEntity.getLose());
+    crawlingDTO.setDraw(crawlingEntity.getDraw());
+    crawlingDTO.setImage(crawlingEntity.getImage());
+    crawlingDTO.setUrl(crawlingEntity.getUrl());
+    crawlingDTO.setFileAttached(crawlingEntity.getFileAttached());
+
+
+
+
+
+    }
+
+
 }

@@ -1,5 +1,8 @@
 package com.its.springsecurity.service;
 
+import com.its.springsecurity.dto.CrawlingDTO;
+import com.its.springsecurity.repository.CrawlingRepository;
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,12 +10,14 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CrawlingService  {
 
-
-    public String craw()throws IOException {
+    private final CrawlingRepository crawlingRepository;
+    public List<CrawlingDTO> craw()throws IOException {
         String url = "https://www.zentoto.com/sports/soccer/epl";
         Document document = Jsoup.connect(url).get();
         Elements elements = document.getElementsByAttributeValue("class","standing-team");
@@ -30,6 +35,8 @@ public class CrawlingService  {
             System.out.println("################################################");
 
 
+
+        List<CrawlingDTO> crawlingDTOList = crawlingRepository.save()
 
 
 
@@ -91,7 +98,7 @@ public class CrawlingService  {
 //                            .build();
 //            CrawlingList.add(crawlingDTO);
 
-        return url;
+        return ;
     }
 
 

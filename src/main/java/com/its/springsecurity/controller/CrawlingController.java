@@ -16,7 +16,8 @@ public class CrawlingController {
     private final CrawlingService crawlingService;
 
     @GetMapping("/craw")
-    public String craw(Model model) throws IOException {
+    public String craw(Model model ,CrawlingDTO crawlingDTO) throws IOException {
+        crawlingService.craw(crawlingDTO);
         List<CrawlingDTO> crawList = crawlingService.findAll();
         model.addAttribute("crawList",crawList);
         return "crawling";

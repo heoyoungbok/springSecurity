@@ -1,12 +1,14 @@
 package com.its.springsecurity.entity;
 
 import com.its.springsecurity.dto.CrawlingDTO;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 
+@Data
 @Entity
 @Getter
 @Setter
@@ -15,7 +17,8 @@ public class CrawlingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
-
+    @Column
+    private Integer ranking;
     @Column
     private String image;
 
@@ -37,7 +40,7 @@ public class CrawlingEntity {
     @Column
     private int fileAttached;
 
-    @Column(length = 10000)
+    @Column
     private String url;
 
     @Column
@@ -53,6 +56,7 @@ public class CrawlingEntity {
     crawlingEntity.setLose(crawlingDTO.getLose());
     crawlingEntity.setDraw(crawlingDTO.getDraw());
     crawlingEntity.setUrl(crawlingDTO.getUrl());
+    crawlingEntity.setRanking(crawlingDTO.getRanking());
     crawlingEntity.setFileAttached(crawlingDTO.getFileAttached());
     return  crawlingEntity;
 

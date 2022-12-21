@@ -27,12 +27,16 @@ public class CrawlingService  {
         Elements contents = element.select("tbody");
         Elements imgElements = contents.select("td img"); // 사진
 
-        Elements nameElements = contents.select("tr a"); // 팀 이름
+        Elements nameElements = contents.select("tr td a"); // 팀 이름
         Elements tdElements = contents.select("tr td"); //
         Elements spanElements = contents.select("tr td span");       // 승리
 //        System.out.println(tdElements.size());
-        String name = nameElements.text(); // 팀이름 추출
-        System.out.println(name);
+//        String name = nameElements.text(); // 팀이름 추출
+//        System.out.println(name);
+        for (int i =0; i< nameElements.size();i++){
+          Element result = nameElements.get(i);
+            System.out.println(result);
+        }
 
 
         String u = "https://www.goal.com/kr/%ED%94%84%EB%A6%AC%EB%AF%B8%EC%96%B4%EB%A6%AC%EA%B7%B8/%EC%88%9C%EC%9C%84/2kwbbcootiqqgmrzs6o5inle5"; // 골스튜디오
@@ -43,12 +47,24 @@ public class CrawlingService  {
         Elements img = cons.select("td img"); // 사진
 
         Elements names = cons.select("tbody tr"); // 팀 이름
-        Elements tNames = names.select("tr");
+        Elements tNames = names.select("tr ");
+        Elements r = tNames.select("td");
+////        String rank = r.text();
+//        System.out.println(r);
+//        String names1 =names.text();
+//
+//        for (int i =0; i<r.size(); i++){
+//            Element result = r.get(i);
+//            System.out.println("##############################");
+//
+//
+//        }
 
-        String names1 =names.text();
+
+
 //        String name1 = tNames.text(); // 팀이름 추출
-        System.out.println(names);
-        System.out.println(names1);
+//        System.out.println(names);
+//        System.out.println(names1);
 //        List<Elements> crawlingDTOList = new ArrayList<>();
 ////        crawlingDTOList.add(names);
 
@@ -63,16 +79,27 @@ public class CrawlingService  {
 //            Element result = tdElements.get(i);
 //
 //            crawlingDTOList.add(result);
-//            System.out.print(result);
+////            System.out.print(result);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO);
+//            Long save = crawlingRepository.save(crawlingEntity).getId();
+//            CrawlingEntity entity = crawlingRepository.findById(save).get();
+//            for ()
 //
 //
 //
-
-        names1 = crawlingDTO.getUrl();
-
-        CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO);
-      crawlingRepository.save(crawlingEntity);
-
+//
+//
+//
+//        System.out.println(crawlingDTO1);
+//
+////
+////
+//
+////        names1 = crawlingDTO.getUrl();
+//
+//        CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//      crawlingRepository.save(crawlingEntity);
+//
 
 //
 //        CrawlingDTO crawlingDTO = new CrawlingDTO();
@@ -154,7 +181,7 @@ public class CrawlingService  {
 //       return ;
 
 //        return CrawlingDTO.coDTO();
-        return crawlingDTO.getId();
+        return null;
     }
 
     public List<CrawlingDTO> findAll() {

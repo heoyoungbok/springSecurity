@@ -37,8 +37,11 @@ public class CrawlingEntity {
     @Column
     private int fileAttached;
 
-    @Column
+    @Column(length = 10000)
     private String url;
+
+    @Column
+    private String round;
 
     public static CrawlingEntity toSaveEntity(CrawlingDTO crawlingDTO){
 

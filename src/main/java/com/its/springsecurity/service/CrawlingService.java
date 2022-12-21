@@ -1,6 +1,7 @@
 package com.its.springsecurity.service;
 
 import com.its.springsecurity.dto.CrawlingDTO;
+import com.its.springsecurity.entity.CrawlingEntity;
 import com.its.springsecurity.repository.CrawlingRepository;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -10,6 +11,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,31 +19,82 @@ import java.util.List;
 public class CrawlingService  {
 
     private final CrawlingRepository crawlingRepository;
-    public List<CrawlingDTO> craw()throws IOException {
-        String url = "https://www.zentoto.com/sports/soccer/epl";
+    public Long craw(CrawlingDTO crawlingDTO)throws IOException {
+        String url = "https://www.zentoto.com/sports/soccer/epl"; // 사설
         Document document = Jsoup.connect(url).get();
         Elements elements = document.getElementsByAttributeValue("class","standing-team");
         Element element = elements.get(0);
         Elements contents = element.select("tbody");
         Elements imgElements = contents.select("td img"); // 사진
-//        Elements tbElement = element.getElementsByAttributeValue("class","td_name");
+
         Elements nameElements = contents.select("tr a"); // 팀 이름
         Elements tdElements = contents.select("tr td"); //
-        System.out.println(tdElements.size());
-        for (int i = 0; i < tdElements.size(); i++) {
-            Element result = tdElements.get(i);
-            System.out.println(result);
+        Elements spanElements = contents.select("tr td span");       // 승리
+//        System.out.println(tdElements.size());
+        String name = nameElements.text(); // 팀이름 추출
+        System.out.println(name);
+
+
+        String u = "https://www.goal.com/kr/%ED%94%84%EB%A6%AC%EB%AF%B8%EC%96%B4%EB%A6%AC%EA%B7%B8/%EC%88%9C%EC%9C%84/2kwbbcootiqqgmrzs6o5inle5"; // 골스튜디오
+        Document doc = Jsoup.connect(u).get();
+        Elements elem = doc.getElementsByAttributeValue("class", "main-content");
+        Element ele= elem.get(0);
+        Elements cons = ele.select("table");
+        Elements img = cons.select("td img"); // 사진
+
+        Elements names = cons.select("tbody tr"); // 팀 이름
+        Elements tNames = names.select("tr");
+
+        String names1 =names.text();
+//        String name1 = tNames.text(); // 팀이름 추출
+        System.out.println(names);
+        System.out.println(names1);
+//        List<Elements> crawlingDTOList = new ArrayList<>();
+////        crawlingDTOList.add(names);
+
+//        CrawlingDTO crawlingDTO1 = new CrawlingDTO();
+//        crawlingDTO1.setUrl(names1);
+//        CrawlingEntity crawlingEntity = new CrawlingEntity();
+//        crawlingEntity.setUrl(crawlingDTO.getUrl());
+//
+//        System.out.println(crawlingEntity);
+
+//        for (int i = 0; i < names.size(); i++){
+//            Element result = tdElements.get(i);
+//
+//            crawlingDTOList.add(result);
+//            System.out.print(result);
+//
+//
+//
+
+        names1 = crawlingDTO.getUrl();
+
+        CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO);
+      crawlingRepository.save(crawlingEntity);
+
+
+//
+//        CrawlingDTO crawlingDTO = new CrawlingDTO();
+//        crawlingDTO.setRound(String.valueOf(tNames));
+//        List<> = crawlingRepository.save(crawlingDTO);
+
+
+//        for (int i = 0; i < nameElements.size(); i++) {
+////            Element result = tdElements.get(i);
+//            final String result = nameElements.get(i).text();
+//            System.out.println(result);
+
 //            elements.attr("td");
-            System.out.println("################################################");
+//            System.out.println("################################################");
 
-
-
-        List<CrawlingDTO> crawlingDTOList = crawlingRepository.save()
-
-
-
-        }
-
+//
+//
+//        }
+//
+//        CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO);
+//        List<CrawlingDTO> crawlingDTOList = crawlingRepository.save(crawlingEntity).getId();
+//
 //
 //        result.select("abbr");
 //
@@ -98,7 +151,20 @@ public class CrawlingService  {
 //                            .build();
 //            CrawlingList.add(crawlingDTO);
 
-        return ;
+//       return ;
+
+//        return CrawlingDTO.coDTO();
+        return crawlingDTO.getId();
+    }
+
+    public List<CrawlingDTO> findAll() {
+        List<CrawlingEntity> crawlingEntityList = crawlingRepository.findAll();
+        List<CrawlingDTO> crawlingDTOList = new ArrayList<>();
+
+        for (CrawlingEntity crawlingEntity : crawlingEntityList){
+            crawlingDTOList.add(CrawlingDTO.coDTO(crawlingEntity));
+        }
+        return crawlingDTOList;
     }
 
 

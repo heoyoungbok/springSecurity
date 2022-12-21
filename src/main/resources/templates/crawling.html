@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>crawling</title>
 </head>
 <body>
-
+        <th>url</th>
+    <tr th:each="craw: ${crawList}">
+        <td th:text="${craw.url}"></td>
+    </tr>
 </body>
 </html>

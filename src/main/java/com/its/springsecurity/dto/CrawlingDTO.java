@@ -1,7 +1,6 @@
 package com.its.springsecurity.dto;
 
 import com.its.springsecurity.entity.CrawlingEntity;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,9 +22,11 @@ public class CrawlingDTO {
     private String draw;
     private String url;
 
+    private String round;
+
     private int fileAttached;
 
-    public static CrawlingDTO coDTO(CrawlingEntity crawlingEntity){]
+    public static CrawlingDTO coDTO(CrawlingEntity crawlingEntity){
     CrawlingDTO crawlingDTO = new CrawlingDTO();
     crawlingDTO.setId(crawlingEntity.getId());
     crawlingDTO.setName(crawlingEntity.getName());
@@ -36,6 +37,8 @@ public class CrawlingDTO {
     crawlingDTO.setImage(crawlingEntity.getImage());
     crawlingDTO.setUrl(crawlingEntity.getUrl());
     crawlingDTO.setFileAttached(crawlingEntity.getFileAttached());
+
+    return crawlingDTO;
 
 
 

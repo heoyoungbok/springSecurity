@@ -1,5 +1,6 @@
 package com.its.springsecurity.service;
 
+import com.its.springsecurity.config.WebConfig;
 import com.its.springsecurity.dto.CrawlingDTO;
 import com.its.springsecurity.entity.CrawlingEntity;
 import com.its.springsecurity.repository.CrawlingRepository;
@@ -14,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,7 +24,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class CrawlingService {
-
+    private final WebConfig webConfig;
     private final CrawlingRepository crawlingRepository;
 
     public void craw(CrawlingDTO crawlingDTO) throws IOException {
@@ -68,15 +70,19 @@ public class CrawlingService {
 //        }
 
 
+
         String u = "https://www.goal.com/kr/%ED%94%84%EB%A6%AC%EB%AF%B8%EC%96%B4%EB%A6%AC%EA%B7%B8/%EC%88%9C%EC%9C%84/2kwbbcootiqqgmrzs6o5inle5"; // 골스튜디오
+
+
+
         Document doc = Jsoup.connect(u).get();
         Elements elem = doc.getElementsByAttributeValue("class", "main-content");
 
         Element ele = elem.get(0);
         Elements cons = ele.select("table");
-        Elements img = cons.select("td img"); // 사진
-//        System.out.println(img);
-
+        Elements img = cons.select("td a img"); // 사진
+        System.out.println(img);
+        Elements src = img.select("src");
         Elements names = cons.select("tbody tr"); // 팀 이름
         Elements tNames = names.select("tr ");
         Elements td = tNames.select("td");
@@ -171,35 +177,144 @@ public class CrawlingService {
             String textResult = result.text();
         }
 
+        for (int i = 0; i < src.size(); i++) {
+            Element result = src.get(i);
+            System.out.println(result);
+//            // src 속성 값에서 파일 이름을 잘라냄
+//            String url = result.attr("src");
+//            String[] splitUrl = result.attr("src").split("/");
+//            String fileName = splitUrl[splitUrl.length-1];
+//            // 파일 다운로드
+//
+//            this.saveAttach(url,fileName,sessinId);
+//            // img 태그의 src 속성을 다운로드한 파일로 수정
+//
+//            result.attr("src",fileName);
+        }
+//
+//        String nUrl = "https://sports.news.naver.com/wfootball/record/index?category=epl&year=2022&tab=team";
+//        Document document = Jsoup.connect(nUrl).get();
+//        Elements elements = document.getElementsByAttributeValue("class","record_tbl");
+//        Elements elem1 = elements.select("table tbody");
+//        Elements TR = elem1.select("tr td");
+//        Elements elem2 = document.getElementsByAttributeValue("class","inner");
+//        Elements bImg = elem2.select("img");
+//        System.out.println(bImg);
+
+
+//
+//        String savePath = "file:///D:/springboot_img/";
+//        File dir = new File(savePath);
+//        if (!dir.exists()){
+//            dir.mkdir();
+//        }
+//            Element result = img.get(i);
+//        try {
+//            doc = Jsoup.connect(u).get();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return;
+
+
         for (int i = 0; i < img.size(); i++) {
             Element result = img.get(i);
-        }
 
-//            Element result = img.get(i);
-            String fileUrl = img.attr("src");  // get the src attribute of the image element
-            URL url = new URL(fileUrl);  // create a URL object from the fileUrl
+            System.out.println(result);
 
-// open a connection to the URL
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");  // set the request method to GET
 
-// get the input stream from the connection and read the file contents
-            InputStream in = connection.getInputStream();
-            byte[] buffer = new byte[4096];
-            int n;
 
-// create a file output stream to write the file to disk
-            FileOutputStream fos = new FileOutputStream("file");
-            while ((n = in.read(buffer)) > 0) {
-                fos.write(buffer, 0, n);
+
+            String fileUrl = img.attr("src");
+            URL url;
+
+            try {
+                url = new URL(fileUrl);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                continue;
+            }
+            HttpURLConnection connection;
+
+            try {
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+            } catch (IOException e) {
+                e.printStackTrace();
+                continue;
             }
 
-// close the streams
-            fos.close();
-            in.close();
-            connection.disconnect();
+            InputStream in;
+
+            try {
+                InputStream inputStream = connection.getInputStream();
+                int contentLength = 0;
+                byte[] buffer = new byte[1024];
+                int n;
+
+
+                FileOutputStream fos = new
+                        FileOutputStream("D://springboot_img//file.png" + (i + 1) + ".png");
+                while ((n = inputStream.read(buffer)) !=-1) {
+                    contentLength += n;
+
+//                    fos.write(buffer, 0, n); // 저장 쿼리
+                }
+                inputStream.close();
+//                connection.setRequestProperty("Content-Length", "1024");
+//                fos.close();
+//                in.close();
+//                connection.disconnect();
+                connection.setRequestProperty("Content-Length",Integer.toString(contentLength));
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                continue;
+            }
+
+
         }
 
+
+//            String imgResult = img.get(i).attr("src");
+
+
+//            String fileUrl = img.attr("src");  // get the src attribute of the image element
+//            URL url = new URL(fileUrl);  // create a URL object from the fileUrl
+//
+//
+////
+////
+////
+////            System.out.println(fileUrl);
+////            System.out.println(img);
+//// open a connection to the URL
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");  // set the request method to GET
+//
+//// get the input stream from the connection and read the file contents
+//            InputStream in = connection.getInputStream();
+//            byte[] buffer = new byte[4096];
+//            int n;
+//
+//// create a file output stream to write the file to disk
+//            FileOutputStream fos = new FileOutputStream("D://springboot_img//file.png"+(i+1)+".png");
+//
+//
+//
+//            while ((n = in.read(buffer)) > 0) {
+//                fos.write(buffer, 0, n);
+//            }
+//
+//// close the streams
+//            fos.close();
+//            in.close();
+//            connection.disconnect();
+//        }
+//
+//
 
 
 //        crawlingDTO1.setContents(textResult);
@@ -216,7 +331,7 @@ public class CrawlingService {
 //        });
 
 
-
+    }
 
 
         public List<CrawlingDTO> findAll(){

@@ -26,6 +26,7 @@ public class CrawlingDTO {
 
     private int fileAttached;
 
+    private String contents;
 //    public CrawlingDTO() {
 //
 //    }
@@ -42,6 +43,7 @@ public class CrawlingDTO {
     crawlingDTO.setImage(crawlingEntity.getImage());
     crawlingDTO.setUrl(crawlingEntity.getUrl());
     crawlingDTO.setRanking(crawlingEntity.getRanking());
+    crawlingDTO.setContents(crawlingEntity.getContents());
     crawlingDTO.setFileAttached(crawlingEntity.getFileAttached());
 
     return crawlingDTO;

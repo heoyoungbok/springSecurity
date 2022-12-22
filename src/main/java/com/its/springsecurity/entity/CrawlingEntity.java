@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Data
@@ -14,6 +15,19 @@ import javax.persistence.*;
 @Setter
 @Table(name = "craw_table")
 public class CrawlingEntity {
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CrawlingEntity that = (CrawlingEntity) o;
+        return Objects.equals(team, that.team);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(team);
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
@@ -46,8 +60,10 @@ public class CrawlingEntity {
     @Column
     private String round;
 
-    public static CrawlingEntity toSaveEntity(CrawlingDTO crawlingDTO){
+    @Column
+    private String contents;
 
+    public static CrawlingEntity toSaveEntity(CrawlingDTO crawlingDTO){
     CrawlingEntity crawlingEntity = new CrawlingEntity();
     crawlingEntity.setName(crawlingDTO.getName());
     crawlingEntity.setImage(crawlingDTO.getImage());
@@ -57,6 +73,7 @@ public class CrawlingEntity {
     crawlingEntity.setDraw(crawlingDTO.getDraw());
     crawlingEntity.setUrl(crawlingDTO.getUrl());
     crawlingEntity.setRanking(crawlingDTO.getRanking());
+    crawlingEntity.setContents(crawlingDTO.getContents());
     crawlingEntity.setFileAttached(crawlingDTO.getFileAttached());
     return  crawlingEntity;
 

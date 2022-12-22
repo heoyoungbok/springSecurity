@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>crawling</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-        <th>url</th>
+<div class="container" id="admin-list">
+    <table class="table table-striped table-hover text-center">
+        <tr>
+        <th>2022-2023 PremierLeague</th>
+        </tr>
+        <th>순위 팀    게임수  승 무 패 득실   승점    최근5경기</th>
     <tr th:each="craw: ${crawList}">
-        <td th:text="${craw.url}"></td>
+        <th th:text="${craw.team}"></th>
     </tr>
+    </table>
+
+</div>
 </body>
 </html>

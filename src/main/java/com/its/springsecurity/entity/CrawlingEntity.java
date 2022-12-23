@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 
 @Data
@@ -16,18 +15,18 @@ import java.util.Objects;
 @Table(name = "craw_table")
 public class CrawlingEntity {
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CrawlingEntity that = (CrawlingEntity) o;
-        return Objects.equals(team, that.team);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(team);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        CrawlingEntity that = (CrawlingEntity) o;
+//        return Objects.equals(team, that.team);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(team);
+//    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;

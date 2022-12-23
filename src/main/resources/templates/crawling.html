@@ -11,9 +11,35 @@
         <tr>
         <th>2022-2023 PremierLeague</th>
         </tr>
-        <th>순위 팀    게임수  승 무 패 득실   승점    최근5경기</th>
-    <tr th:each="craw: ${crawList}">
+        <th>순위</th>
+        <th></th>
+        <th>팀</th>
+        <th>게임수</th>
+        <th>승</th>
+        <th>무</th>
+        <th>패</th>
+        <th>득점</th>
+        <th>실점</th>
+        <th>승점</th>
+        <th>최근 5경기</th>
+
+
+        <tr th:each="craw :${crawList}">
+        <th th:text="${craw.id}"></th>
+            <th>
+<!--                <tr th:each="img: ${#numbers.sequence(1,20)}">-->
+                <img th:src="@{/img/}${imageUrls[craw.id - 1]}" alt="Team logo">
+<!--                </tr>-->
+            </th>
         <th th:text="${craw.team}"></th>
+            <th th:text="${craw.games}"></th>
+            <th th:text="${craw.win}"></th>
+            <th th:text="${craw.draw}"></th>
+            <th th:text="${craw.lose}"></th>
+            <th th:text="${craw.plus}"></th>
+            <th th:text="${craw.minus}"></th>
+            <th th:text="${craw.diff}"></th>
+            <th th:text="${craw.point}"></th>
     </tr>
     </table>
 

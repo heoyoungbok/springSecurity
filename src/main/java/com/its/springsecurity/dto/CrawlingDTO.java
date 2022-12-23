@@ -9,8 +9,8 @@ import lombok.*;
 @ToString
 public class CrawlingDTO {
     private Long id;
-    private Integer ranking;
-    private String image;
+//    private Integer ranking;
+    private String games;
     private String name;
 
     private String team;
@@ -20,10 +20,15 @@ public class CrawlingDTO {
     private String win;
 
     private String draw;
-    private String url;
+    private String point;
 
     private String round;
 
+    private String plus;
+
+    private String minus;
+
+    private String diff;
     private int fileAttached;
 
     private String contents;
@@ -40,9 +45,12 @@ public class CrawlingDTO {
     crawlingDTO.setWin(crawlingEntity.getWin());
     crawlingDTO.setLose(crawlingEntity.getLose());
     crawlingDTO.setDraw(crawlingEntity.getDraw());
-    crawlingDTO.setImage(crawlingEntity.getImage());
-    crawlingDTO.setUrl(crawlingEntity.getUrl());
-    crawlingDTO.setRanking(crawlingEntity.getRanking());
+    crawlingDTO.setGames(crawlingEntity.getGames());
+    crawlingDTO.setPoint(crawlingEntity.getPoint());
+    crawlingDTO.setPlus(crawlingEntity.getPlus());
+    crawlingDTO.setMinus(crawlingEntity.getMinus());
+    crawlingDTO.setDiff(crawlingEntity.getDiff());
+//    crawlingDTO.setRanking(crawlingEntity.getRanking());
     crawlingDTO.setContents(crawlingEntity.getContents());
     crawlingDTO.setFileAttached(crawlingEntity.getFileAttached());
 

@@ -32,9 +32,9 @@ public class CrawlingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
     @Column
-    private Integer ranking;
-    @Column
-    private String image;
+    private String games;
+//    @Column
+//    private String image;
 
     @Column
     private String team;
@@ -55,24 +55,34 @@ public class CrawlingEntity {
     private int fileAttached;
 
     @Column
-    private String url;
+    private String point;
 
     @Column
     private String round;
+    @Column
+    private String plus;
 
+    @Column
+    private String minus;
+
+    @Column
+    private String diff;
     @Column
     private String contents;
 
     public static CrawlingEntity toSaveEntity(CrawlingDTO crawlingDTO){
     CrawlingEntity crawlingEntity = new CrawlingEntity();
     crawlingEntity.setName(crawlingDTO.getName());
-    crawlingEntity.setImage(crawlingDTO.getImage());
+    crawlingEntity.setGames(crawlingDTO.getGames());
     crawlingEntity.setTeam(crawlingDTO.getTeam());
     crawlingEntity.setWin(crawlingDTO.getWin());
     crawlingEntity.setLose(crawlingDTO.getLose());
     crawlingEntity.setDraw(crawlingDTO.getDraw());
-    crawlingEntity.setUrl(crawlingDTO.getUrl());
-    crawlingEntity.setRanking(crawlingDTO.getRanking());
+    crawlingEntity.setPoint(crawlingDTO.getPoint());
+    crawlingEntity.setPlus(crawlingDTO.getPlus());
+    crawlingEntity.setMinus(crawlingDTO.getMinus());
+    crawlingEntity.setDiff(crawlingDTO.getDiff());
+//    crawlingEntity.setRanking(crawlingDTO.getRanking());
     crawlingEntity.setContents(crawlingDTO.getContents());
     crawlingEntity.setFileAttached(crawlingDTO.getFileAttached());
     return  crawlingEntity;

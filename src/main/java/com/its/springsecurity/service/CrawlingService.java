@@ -1,10 +1,10 @@
 package com.its.springsecurity.service;
 
-import com.its.springsecurity.config.WebConfig;
 import com.its.springsecurity.dto.CrawlingDTO;
 import com.its.springsecurity.entity.CrawlingEntity;
 import com.its.springsecurity.repository.CrawlingRepository;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,33 +14,29 @@ import org.springframework.stereotype.Service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 @Service
 @RequiredArgsConstructor
 public class CrawlingService {
-    private final WebConfig webConfig;
+//    private final WebConfig webConfig;
     private final CrawlingRepository crawlingRepository;
 
     public void craw(CrawlingDTO crawlingDTO) throws IOException {
-//        String url = "https://www.zentoto.com/sports/soccer/epl"; // 사설
-//        Document document = Jsoup.connect(url).get();
-//        Elements elements = document.getElementsByAttributeValue("class", "standing-team");
-//        Element element = elements.get(0);
-//        Elements contents = element.select("tbody");
-//        Elements imgElements = contents.select("td img"); // 사진
-//
-//        Elements nameElements = contents.select("tr td a"); // 팀 이름
-//        Elements tdElements = contents.select("tr td"); //
-//        Elements spanElements = contents.select("tr td span");       // 승리
-////        System.out.println(tdElements.size());
-////        String name = nameElements.text(); // 팀이름 추출
-////        System.out.println(name);
+        String url2 = "https://www.zentoto.com/sports/soccer/epl"; // 사설
+        Document document = Jsoup.connect(url2).get();
+        Elements elements = document.getElementsByAttributeValue("class", "standing-team");
+        Element element = elements.get(0);
+        Elements contents = element.select("tbody");
+        Elements td1Elements = contents.select("td img"); // 사진
+        Elements src1 = td1Elements.select("src");
+//        System.out.println(td1Elements.size());
+        Elements nameElements = contents.select("tr td a"); // 팀 이름
+        Elements tdElements = contents.select("tr td"); //
+        Elements spanElements = contents.select("tr td span");       // 승리
+//        System.out.println(tdElements.size());
+//        String name = nameElements.text(); // 팀이름 추출
+//        System.out.println(name);
 //        for (int i = 0; i < nameElements.size(); i++) {
 //            Element result = nameElements.get(i);
 //            String name = result.text();
@@ -70,9 +66,7 @@ public class CrawlingService {
 //        }
 
 
-
         String u = "https://www.goal.com/kr/%ED%94%84%EB%A6%AC%EB%AF%B8%EC%96%B4%EB%A6%AC%EA%B7%B8/%EC%88%9C%EC%9C%84/2kwbbcootiqqgmrzs6o5inle5"; // 골스튜디오
-
 
 
         Document doc = Jsoup.connect(u).get();
@@ -81,12 +75,17 @@ public class CrawlingService {
         Element ele = elem.get(0);
         Elements cons = ele.select("table");
         Elements img = cons.select("td a img"); // 사진
-        System.out.println(img);
+//        System.out.println(img);
         Elements src = img.select("src");
         Elements names = cons.select("tbody tr"); // 팀 이름
         Elements tNames = names.select("tr ");
+//        System.out.println(tNames); // td 접근
         Elements td = tNames.select("td");
+        Elements elem2 = doc.getElementsByAttributeValue("class","widget-match-standings__team--full-name");
+//        System.out.println(elem2);
         Elements team = td.select("span");
+//        System.out.println(team);
+//        System.out.println(team.size());
 //            Elements tdD = td.select("widget-match-standings__matches-played");
 //            System.out.println(tdD.size());
         Elements elements1 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-played");
@@ -108,89 +107,137 @@ public class CrawlingService {
         Elements elements6 = doc.getElementsByAttributeValue("class", "widget-match-standings__pts");
         Elements points = elements6.select("td");
 
+        Elements elements7 = doc.getElementsByAttributeValue("class","widget-match-standings__goals-for");
+        Elements goals = elements7.select("td");
+
+        Elements elements8 = doc.getElementsByAttributeValue("class","widget-match-standings__goals-against");
+        Elements goalLost = elements8.select("td");
 
         Set<CrawlingEntity> uniqueContents = new HashSet<>();    // td에 대한 전체 포문
         CrawlingDTO crawlingDTO1 = new CrawlingDTO();
         CrawlingEntity entity = new CrawlingEntity();
-        for (int i = 0; i < tNames.size(); i++) {
-            Element result;
-            result = tNames.get(i);
-            String result1 = result.text();
-            crawlingDTO1.setTeam(result1);
-            uniqueContents.add(entity);
-            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//        for (int i = 0; i < tNames.size(); i++) {
+//            Element result;
+//            result = tNames.get(i);
+//            String result1 = result.text();
+//            crawlingDTO1.setTeam(result1);
+//            uniqueContents.add(entity);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//
+//            // 같은 이름이 중복될시 저장되는 건 미확인
+//            for (CrawlingEntity crawling : uniqueContents) {
+//                crawlingRepository.save(crawling);
+//
+////                String textResult = result.
+////                System.out.println(result1);
+//
+//            }
+//
+//
+//        }
 
-            // 같은 이름이 중복될시 저장되는 건 미확인
-            for (CrawlingEntity crawling : uniqueContents) {
-                crawlingRepository.save(crawling);
-
-//                String textResult = result.
-//                System.out.println(result1);
-
-            }
-
-
-        }
-
-        for (int i = 0; i < team.size(); i++) {   // 팀이름
-            Element result = team.get(i);
+        for (int i = 0; i < elem2.size(); i++) {   // 팀이름
+            Element result = elem2.get(i);
             String textResult = result.text();
-            System.out.println(textResult);
+//            System.out.println(textResult);
 //            String result1 = result.text();
             crawlingDTO1.setTeam(textResult);
+            uniqueContents.add(entity);
+            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+            crawlingRepository.save(crawlingEntity);
+
+        }
+//
+//
+//        for (int i = 0; i < games.size(); i++) {  //게임수
+//            Element result = games.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setGames(textResult);
 //            uniqueContents.add(entity);
 //            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
 //            crawlingRepository.save(crawlingEntity);
 //
-        }
-
-
-        for (int i = 0; i < games.size(); i++) {  //게임수
-            Element result = games.get(i);
-            String textResult = result.text();
-
-
-        }
-
-        for (int i = 0; i < wins.size(); i++) {  // 승리한 경기
-            Element result = wins.get(i);
-            String textResult = result.text();
-        }
-
-        for (int i = 0; i < draws.size(); i++) {
-            Element result = draws.get(i);
-            String textResult = result.text();
-        }
-
-        for (int i = 0; i < lost.size(); i++) {
-            Element result = lost.get(i);
-            String textResult = result.text();
-        }
-
-        for (int i = 0; i < diff.size(); i++) {
-            Element result = diff.get(i);
-            String textResult = result.text();
-        }
-
-        for (int i = 0; i < points.size(); i++) {
-            Element result = points.get(i);
-            String textResult = result.text();
-        }
-
-        for (int i = 0; i < src.size(); i++) {
-            Element result = src.get(i);
-            System.out.println(result);
-//            // src 속성 값에서 파일 이름을 잘라냄
-//            String url = result.attr("src");
-//            String[] splitUrl = result.attr("src").split("/");
-//            String fileName = splitUrl[splitUrl.length-1];
-//            // 파일 다운로드
 //
-//            this.saveAttach(url,fileName,sessinId);
-//            // img 태그의 src 속성을 다운로드한 파일로 수정
+//        }
 //
-//            result.attr("src",fileName);
-        }
+//        for (int i = 0; i < wins.size(); i++) {  // 승리한 경기
+//            Element result = wins.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setWin(textResult);
+//            uniqueContents.add(entity);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//            crawlingRepository.save(crawlingEntity);
+//        }
+//
+//        for (int i = 0; i < draws.size(); i++) {
+//            Element result = draws.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setDraw(textResult);
+//            uniqueContents.add(entity);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//            crawlingRepository.save(crawlingEntity);
+//        }
+//
+//        for (int i = 0; i < lost.size(); i++) {
+//            Element result = lost.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setLose(textResult);
+//            uniqueContents.add(entity);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//            crawlingRepository.save(crawlingEntity);
+//        }
+//
+//        for (int i =0; i<goals.size(); i++){
+//            Element result = goals.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setPlus(textResult);
+//            uniqueContents.add(entity);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//            crawlingRepository.save(crawlingEntity);
+//        }
+//        for (int i =0; i<goalLost.size(); i++){
+//            Element result = goalLost.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setMinus(textResult);
+//            uniqueContents.add(entity);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//            crawlingRepository.save(crawlingEntity);
+//        }
+//
+//
+//
+//
+//        for (int i = 0; i < diff.size(); i++) {
+//            Element result = diff.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setDiff(textResult);
+//            uniqueContents.add(entity);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//            crawlingRepository.save(crawlingEntity);
+//        }
+//
+//        for (int i = 0; i < points.size(); i++) {
+//            Element result = points.get(i);
+//            String textResult = result.text();
+//            crawlingDTO1.setPoint(textResult);
+//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
+//            crawlingRepository.save(crawlingEntity);
+//        }
+
+//        for (int i = 0; i < src.size(); i++) {
+//            Element result = src.get(i);
+//            System.out.println(result);
+////            // src 속성 값에서 파일 이름을 잘라냄
+////            String url = result.attr("src");
+////            String[] splitUrl = result.attr("src").split("/");
+////            String fileName = splitUrl[splitUrl.length-1];
+////            // 파일 다운로드
+////
+////            this.saveAttach(url,fileName,sessinId);
+////            // img 태그의 src 속성을 다운로드한 파일로 수정
+////
+////            result.attr("src",fileName);
+//        }
 //
 //        String nUrl = "https://sports.news.naver.com/wfootball/record/index?category=epl&year=2022&tab=team";
 //        Document document = Jsoup.connect(nUrl).get();
@@ -215,64 +262,107 @@ public class CrawlingService {
 //            e.printStackTrace();
 //        }
 //        return;
+        String P1 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4dsgumo7d4zupm2ugsvm4zm4d.png";
+        String P2 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_a3nyxabgsqlnqfkeg41m6tnpp.png";
+        String P3 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_7vn2i2kd35zuetw6b38gw9jsz.png";
+        String P4 ="https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_22doj4sgsocqpxw45h607udje.png";
+        String P5 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_6eqit8ye8aomdsrrq0hk3v7gh.png";
+        String P6 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_c8h9bw1l82s06h77xxrelzhur.png";
+        String P7 ="https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_e5p0ehyguld7egzhiedpdnc3w.png";
+        String P8 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_9q0arba2kbnywth8bkxlhgmdr.png";
+        String P9  = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_hzqh7z0mdl3v7gwete66syxp.png";
+        String P10  = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_7yx5dqhhphyvfisohikodajhv.png";
+        String P11 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1c8m2ko0wxq1asfkuykurdr0y.png";
+        String P12 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_b496gs285it6bheuikox6z9mj.png";
+        String P13 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_avxknfz4f6ob0rv9dbnxdzde0.png";
+        String P14 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1pse9ta7a45pi2w2grjim70ge.png";
+        String P15 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_48gk2hpqtsl6p9sx9kjhaydq4.png";
+        String P16 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4txjdaqveermfryvbfrr4taf7.png";
+        String P17 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_ehd2iemqmschhj2ec0vayztzz.png";  // 해당 url 웹크롤링이 불가능 한 것 같아 직접 접근을 하여 복사
+        String P18 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1qtaiy11gswx327s0vkibf70n.png";
+        String P19 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_d5ydtvt96bv7fq04yqm2w2632.png";
+        String P20  = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_b9si1jn1lfxfund69e9ogcu2n.png";
+        List<String> imageUrls = Arrays.asList(P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12,P13,P14,P15,P16,P17,P18,P19,P20); //리스트에 담아줌
 
 
-        for (int i = 0; i < img.size(); i++) {
-            Element result = img.get(i);
 
-            System.out.println(result);
+        for (int i = 0; i < imageUrls.size(); i++) {
+            String imageUrl = imageUrls.get(i);
+//            Element text = result.select(src.text()).get(i);
+//            System.out.println(text);
+            Connection.Response response = Jsoup.connect(imageUrl)
+                    .ignoreContentType(true)
+                    .userAgent("MyJavaClient/1.0")
+                    .method(Connection.Method.GET)
+                    .execute();
 
 
+            try (InputStream inputStream = response.bodyStream();
+                 FileOutputStream fos = new FileOutputStream("D://springboot_img//file.png" + (i + 1) + ".png")) {
 
-
-            String fileUrl = img.attr("src");
-            URL url;
-
-            try {
-                url = new URL(fileUrl);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                continue;
-            }
-            HttpURLConnection connection;
-
-            try {
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-            } catch (IOException e) {
-                e.printStackTrace();
-                continue;
-            }
-
-            InputStream in;
-
-            try {
-                InputStream inputStream = connection.getInputStream();
-                int contentLength = 0;
+//            Connection.Response response =
+//                    (Connection.Response) Jsoup.connect(imageUrl).ignoreContentType(true).execute();
                 byte[] buffer = new byte[1024];
                 int n;
-
-
-                FileOutputStream fos = new
-                        FileOutputStream("D://springboot_img//file.png" + (i + 1) + ".png");
-                while ((n = inputStream.read(buffer)) !=-1) {
-                    contentLength += n;
-
-//                    fos.write(buffer, 0, n); // 저장 쿼리
+                while ((n = inputStream.read(buffer)) != -1) {
+                    fos.write(buffer, 0, n);
                 }
-                inputStream.close();
-//                connection.setRequestProperty("Content-Length", "1024");
-//                fos.close();
-//                in.close();
-//                connection.disconnect();
-                connection.setRequestProperty("Content-Length",Integer.toString(contentLength));
 
-
-
+//            fos.write(imageData);
+                fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
                 continue;
             }
+
+        }
+//
+//            String fileUrl = td1Elements.attr("src");
+//            URL url = new URL(u+fileUrl);
+//            URLEncoder.encode(u);
+////            try {
+////
+//////                url = new URL(fileUrl);
+////            } catch (MalformedURLException e) {
+////                e.printStackTrace();
+////                continue;
+////            }
+//
+//
+//
+//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                connection.setRequestMethod("GET");
+//                connection.setRequestProperty("User-Agent",",MyJavaClient/1.0");
+//                connection.connect();
+////                int responseCode = connection.getResponseCode();
+////                String responseMessage = connection.getResponseMessage();
+////                Map<String,List<String>> headers = connection.getHeaderFields();
+//
+//
+////            InputStream in;
+//
+//            try (InputStream inputStream = connection.getInputStream();
+//                FileOutputStream fos = new FileOutputStream("D://springboot_img//file.png" + (i + 1) + ".png")) {
+//                int contentLength = 0;
+//                byte[] buffer = new byte[1024];
+//                int n;
+//
+//
+//                while ((n = inputStream.read(buffer)) != -1) {
+//                    contentLength += n;
+//                    fos.write(buffer,0,n);
+//                }
+////                    connection.setRequestProperty("Content-Length", Integer.toString(contentLength));
+//                connection.setRequestProperty("Accept-Encoding", "gzip");
+////                    fos.write(buffer, 0, n); // 저장 쿼리
+//
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                continue;
+//            } finally {
+//                connection.disconnect();
+//            }
 
 
         }
@@ -331,7 +421,7 @@ public class CrawlingService {
 //        });
 
 
-    }
+
 
 
         public List<CrawlingDTO> findAll(){

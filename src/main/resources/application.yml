@@ -31,3 +31,25 @@ logging:
           descriptor:
             sql:
               BasicBinder: trace
+
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 135592200766-tpa3vlboi61mfjc21u6t1q46ndu1tvhp.apps.googleusercontent.com
+            client-secret: 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
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/google"
+            scope:
+              -email
+              -profile
+            provider:
+            google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            ser-name-attribute: email

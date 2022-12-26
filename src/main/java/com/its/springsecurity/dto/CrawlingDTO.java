@@ -29,9 +29,8 @@ public class CrawlingDTO {
     private String minus;
 
     private String diff;
-    private int fileAttached;
 
-    private String contents;
+
 //    public CrawlingDTO() {
 //
 //    }
@@ -51,8 +50,6 @@ public class CrawlingDTO {
     crawlingDTO.setMinus(crawlingEntity.getMinus());
     crawlingDTO.setDiff(crawlingEntity.getDiff());
 //    crawlingDTO.setRanking(crawlingEntity.getRanking());
-    crawlingDTO.setContents(crawlingEntity.getContents());
-    crawlingDTO.setFileAttached(crawlingEntity.getFileAttached());
 
     return crawlingDTO;
 

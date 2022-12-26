@@ -1,8 +1,8 @@
 package com.its.springsecurity.service;
 
-import com.its.springsecurity.dto.CrawlingDTO;
-import com.its.springsecurity.entity.CrawlingEntity;
-import com.its.springsecurity.repository.CrawlingRepository;
+import com.its.springsecurity.dto.*;
+import com.its.springsecurity.entity.*;
+import com.its.springsecurity.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,13 +14,24 @@ import org.springframework.stereotype.Service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CrawlingService {
     //    private final WebConfig webConfig;
     private final CrawlingRepository crawlingRepository;
+    private final CrawlingRepository2 crawlingRepository2;
+
+    private final CrawlingRepository3 crawlingRepository3;
+
+    private final CrawlingRepository4 crawlingRepository4;
+
+    private final CrawlingRepository5 crawlingRepository5;
+
+    private final CrawlingRepository6 crawlingRepository6;
 
     public void craw(CrawlingDTO crawlingDTO) throws IOException {
 //        String url2 = "https://www.zentoto.com/sports/soccer/epl"; // 사설
@@ -351,13 +362,328 @@ public class CrawlingService {
 
         public List<CrawlingDTO> findAll(){
             List<CrawlingEntity> crawlingEntityList = crawlingRepository.findAll();
-            List<CrawlingDTO> crawlingDTOList = new ArrayList<>();
+            List<CrawlingDTO> crawlingDTOList =  crawlingEntityList.stream()
+                    .map(CrawlingDTO::coDTO)
+                    .collect(Collectors.toList());
 
-            for (CrawlingEntity crawlingEntity : crawlingEntityList) {
-                crawlingDTOList.add(CrawlingDTO.coDTO(crawlingEntity));
-            }
+//
+//            for (CrawlingEntity crawlingEntity : crawlingEntityList) {
+//                crawlingDTOList.add(CrawlingDTO.coDTO(crawlingEntity));
+//            }
             return crawlingDTOList;
         }
+
+        public List<Crawling2DTO> findAll2(){
+        List<CrawlingEntity2> crawlingEntityList = crawlingRepository2.findAll();
+        List<Crawling2DTO> crawling2DTOList = crawlingEntityList.stream()
+                .map(Crawling2DTO::coDTO2)
+                .collect(Collectors.toList());
+                return crawling2DTOList;
+        }
+
+    public List<Crawling3DTO> findAll3() {
+        List<CrawlingEntity3> crawlingEntityList = crawlingRepository3.findAll();
+        List<Crawling3DTO> crawling3DTOList = crawlingEntityList.stream()
+                .map(Crawling3DTO::coDTO3)
+                .collect(Collectors.toList());
+        return crawling3DTOList;
+    }
+
+    public List<Crawling4DTO> findAll4() {
+        List< CrawlingEntity4> crawlingEntityList = crawlingRepository4.findAll();
+        List<Crawling4DTO> crawling4DTOList = crawlingEntityList.stream()
+                .map(Crawling4DTO::coDTO4)
+                .collect(Collectors.toList());
+        return crawling4DTOList;
+    }
+
+    public List<Crawling5DTO> findAll5() {
+        List<CrawlingEntity5> crawlingEntityList = crawlingRepository5.findAll();
+        List<Crawling5DTO> crawling5DTOList = crawlingEntityList.stream()
+                .map(Crawling5DTO::coDTO5)
+                .collect(Collectors.toList());
+        return crawling5DTOList;
+    }
+
+    public List<Crawling6DTO> findAll6() {
+        List< CrawlingEntity6> crawlingEntityList = crawlingRepository6.findAll();
+        List<Crawling6DTO> crawling6DTOList = crawlingEntityList.stream()
+                .map(Crawling6DTO::coDTO6)
+                .collect(Collectors.toList());
+        return crawling6DTOList;
+    }
+
+
+
+
+    public void l2(Crawling2DTO crawling2DTO) throws IOException {
+        String U = "https://www.goal.com/kr/%ED%94%84%EB%A6%AC%EB%A9%94%EB%9D%BC%EB%A6%AC%EA%B0%80/%EC%88%9C%EC%9C%84/34pl8szyvrbwcmfkuocjm3r6t";
+        Document doc = Jsoup.connect(U).get();
+        Elements elem = doc.getElementsByAttributeValue("class", "main-content");
+
+        Elements elem2 = doc.getElementsByAttributeValue("class", "widget-match-standings__team--full-name");
+//        System.out.println(elem2);
+        Elements elements1 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-played");
+        Elements games = elements1.select("td");
+//        System.out.println(games);
+        Elements elements2 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-won");
+        Elements wins = elements2.select("td");
+//        System.out.println(wins);
+
+        Elements elements3 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-drawn");
+        Elements draws = elements3.select("td");
+//        System.out.println(draws);
+        Elements elements4 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-lost");
+        Elements lost = elements4.select("td");
+//        System.out.println(lost);
+        Elements elements5 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-diff");
+        Elements diff = elements5.select("td");
+//        System.out.println(diff);
+        Elements elements6 = doc.getElementsByAttributeValue("class", "widget-match-standings__pts");
+        Elements points = elements6.select("td");
+//        System.out.println(points);
+        Elements elements7 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-for");
+        Elements goals = elements7.select("td");
+//        System.out.println(goals);
+        Elements elements8 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-against");
+        Elements goalLost = elements8.select("td");
+//        System.out.println(goalLost);
+
+
+//        List<CrawlingEntity2> crawlingEntityList2 = new ArrayList<>();
+//        for (int i = 0; i < elem2.size(); i++) {     // 반복문을 통해 저장처리
+//            Crawling2DTO craw2DTO = new Crawling2DTO();
+//            craw2DTO.setTeam(elem2.get(i).text());
+//            craw2DTO.setGames(games.get(i).text());
+//            craw2DTO.setWin(wins.get(i).text());
+//            craw2DTO.setDraw(draws.get(i).text());
+//            craw2DTO.setLose(lost.get(i).text());
+//            craw2DTO.setPlus(goals.get(i).text());
+//            craw2DTO.setMinus(goalLost.get(i).text());
+//            craw2DTO.setDiff(diff.get(i).text());
+//            craw2DTO.setPoint(points.get(i).text());
+////            crawlingEntityList2.add(CrawlingEntity2.toSaveEntity(craw2DTO));
+//            crawlingRepository2.save(CrawlingEntity2.toSaveEntity(craw2DTO));
+//
+//        }
+
+
+
+    }
+
+    public void l3(Crawling3DTO crawling3DTO) throws IOException {
+        String u3 = "https://www.goal.com/kr/%EB%B6%84%EB%8D%B0%EC%8A%A4%EB%A6%AC%EA%B0%80/%EC%88%9C%EC%9C%84/6by3h89i2eykc341oz7lv1ddd";
+        Document doc = Jsoup.connect(u3).get();
+        Elements elem = doc.getElementsByAttributeValue("class", "main-content");
+
+        Elements elem2 = doc.getElementsByAttributeValue("class", "widget-match-standings__team--full-name");
+//        System.out.println(elem2);
+        Elements elements1 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-played");
+        Elements games = elements1.select("td");
+//        System.out.println(games);
+        Elements elements2 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-won");
+        Elements wins = elements2.select("td");
+//        System.out.println(wins);
+
+        Elements elements3 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-drawn");
+        Elements draws = elements3.select("td");
+//        System.out.println(draws);
+        Elements elements4 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-lost");
+        Elements lost = elements4.select("td");
+//        System.out.println(lost);
+        Elements elements5 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-diff");
+        Elements diff = elements5.select("td");
+//        System.out.println(diff);
+        Elements elements6 = doc.getElementsByAttributeValue("class", "widget-match-standings__pts");
+        Elements points = elements6.select("td");
+//        System.out.println(points);
+        Elements elements7 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-for");
+        Elements goals = elements7.select("td");
+//        System.out.println(goals);
+        Elements elements8 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-against");
+        Elements goalLost = elements8.select("td");
+//        System.out.println(goalLost);
+
+//        List<CrawlingEntity3> crawlingEntityList3 = new ArrayList<>();
+//        for (int i = 0; i < elem2.size(); i++) {     // 반복문을 통해 저장처리
+//            Crawling3DTO craw3DTO = new Crawling3DTO();
+//            craw3DTO.setTeam(elem2.get(i).text());
+//            craw3DTO.setGames(games.get(i).text());
+//            craw3DTO.setWin(wins.get(i).text());
+//            craw3DTO.setDraw(draws.get(i).text());
+//            craw3DTO.setLose(lost.get(i).text());
+//            craw3DTO.setPlus(goals.get(i).text());
+//            craw3DTO.setMinus(goalLost.get(i).text());
+//            craw3DTO.setDiff(diff.get(i).text());
+//            craw3DTO.setPoint(points.get(i).text());
+////            crawlingEntityList2.add(CrawlingEntity2.toSaveEntity(craw2DTO));
+//            crawlingRepository3.save(CrawlingEntity3.toSaveEntity(craw3DTO));
+//
+//        }
+
+
+
+    }
+
+
+    public void l4(Crawling4DTO crawling4DTO) throws IOException {
+        String u4 = "https://www.goal.com/kr/%EC%84%B8%EB%A6%AC%EC%97%90-a/%EC%88%9C%EC%9C%84/1r097lpxe0xn03ihb7wi98kao";
+        Document doc = Jsoup.connect(u4).get();
+        Elements elem = doc.getElementsByAttributeValue("class", "main-content");
+
+        Elements elem2 = doc.getElementsByAttributeValue("class", "widget-match-standings__team--full-name");
+//        System.out.println(elem2);
+        Elements elements1 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-played");
+        Elements games = elements1.select("td");
+//        System.out.println(games);
+        Elements elements2 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-won");
+        Elements wins = elements2.select("td");
+//        System.out.println(wins);
+
+        Elements elements3 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-drawn");
+        Elements draws = elements3.select("td");
+//        System.out.println(draws);
+        Elements elements4 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-lost");
+        Elements lost = elements4.select("td");
+//        System.out.println(lost);
+        Elements elements5 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-diff");
+        Elements diff = elements5.select("td");
+//        System.out.println(diff);
+        Elements elements6 = doc.getElementsByAttributeValue("class", "widget-match-standings__pts");
+        Elements points = elements6.select("td");
+//        System.out.println(points);
+        Elements elements7 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-for");
+        Elements goals = elements7.select("td");
+//        System.out.println(goals);
+        Elements elements8 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-against");
+        Elements goalLost = elements8.select("td");
+//        System.out.println(goalLost);
+
+//        List<CrawlingEntity4> crawlingEntityList4 = new ArrayList<>();
+//        for (int i = 0; i < elem2.size(); i++) {     // 반복문을 통해 저장처리
+//            Crawling4DTO craw4DTO = new Crawling4DTO();
+//            craw4DTO.setTeam(elem2.get(i).text());
+//            craw4DTO.setGames(games.get(i).text());
+//            craw4DTO.setWin(wins.get(i).text());
+//            craw4DTO.setDraw(draws.get(i).text());
+//            craw4DTO.setLose(lost.get(i).text());
+//            craw4DTO.setPlus(goals.get(i).text());
+//            craw4DTO.setMinus(goalLost.get(i).text());
+//            craw4DTO.setDiff(diff.get(i).text());
+//            craw4DTO.setPoint(points.get(i).text());
+////            crawlingEntityList2.add(CrawlingEntity2.toSaveEntity(craw2DTO));
+//            crawlingRepository4.save(CrawlingEntity4.toSaveEntity(craw4DTO));
+//
+//        }
+
+    }
+
+    public void l5(Crawling5DTO crawling5DTO) throws IOException {
+        String u5 = "https://www.goal.com/kr/%EC%97%90%EB%A0%88%EB%94%94%EB%B9%84%EC%A7%80/%EC%88%9C%EC%9C%84/akmkihra9ruad09ljapsm84b3";
+        Document doc = Jsoup.connect(u5).get();
+        Elements elem = doc.getElementsByAttributeValue("class", "main-content");
+
+        Elements elem2 = doc.getElementsByAttributeValue("class", "widget-match-standings__team--full-name");
+//        System.out.println(elem2);
+        Elements elements1 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-played");
+        Elements games = elements1.select("td");
+//        System.out.println(games);
+        Elements elements2 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-won");
+        Elements wins = elements2.select("td");
+//        System.out.println(wins);
+
+        Elements elements3 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-drawn");
+        Elements draws = elements3.select("td");
+//        System.out.println(draws);
+        Elements elements4 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-lost");
+        Elements lost = elements4.select("td");
+//        System.out.println(lost);
+        Elements elements5 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-diff");
+        Elements diff = elements5.select("td");
+//        System.out.println(diff);
+        Elements elements6 = doc.getElementsByAttributeValue("class", "widget-match-standings__pts");
+        Elements points = elements6.select("td");
+//        System.out.println(points);
+        Elements elements7 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-for");
+        Elements goals = elements7.select("td");
+//        System.out.println(goals);
+        Elements elements8 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-against");
+        Elements goalLost = elements8.select("td");
+//        System.out.println(goalLost);
+
+//        List<CrawlingEntity5> crawlingEntityList5 = new ArrayList<>();
+//        for (int i = 0; i < elem2.size(); i++) {     // 반복문을 통해 저장처리
+//            Crawling5DTO craw5DTO = new Crawling5DTO();
+//            craw5DTO.setTeam(elem2.get(i).text());
+//            craw5DTO.setGames(games.get(i).text());
+//            craw5DTO.setWin(wins.get(i).text());
+//            craw5DTO.setDraw(draws.get(i).text());
+//            craw5DTO.setLose(lost.get(i).text());
+//            craw5DTO.setPlus(goals.get(i).text());
+//            craw5DTO.setMinus(goalLost.get(i).text());
+//            craw5DTO.setDiff(diff.get(i).text());
+//            craw5DTO.setPoint(points.get(i).text());
+////            crawlingEntityList2.add(CrawlingEntity2.toSaveEntity(craw2DTO));
+//            crawlingRepository5.save(CrawlingEntity5.toSaveEntity(craw5DTO));
+//
+//        }
+   }
+
+    public void l6(Crawling6DTO crawling6DTO) throws IOException {
+
+        String u6 = "https://www.goal.com/kr/%EB%A6%AC%EA%B7%B8-1/%EC%88%9C%EC%9C%84/dm5ka0os1e3dxcp3vh05kmp33";
+        Document doc = Jsoup.connect(u6).get();
+        Elements elem = doc.getElementsByAttributeValue("class", "main-content");
+
+        Elements elem2 = doc.getElementsByAttributeValue("class", "widget-match-standings__team--full-name");
+//        System.out.println(elem2);
+        Elements elements1 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-played");
+        Elements games = elements1.select("td");
+//        System.out.println(games);
+        Elements elements2 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-won");
+        Elements wins = elements2.select("td");
+//        System.out.println(wins);
+
+        Elements elements3 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-drawn");
+        Elements draws = elements3.select("td");
+//        System.out.println(draws);
+        Elements elements4 = doc.getElementsByAttributeValue("class", "widget-match-standings__matches-lost");
+        Elements lost = elements4.select("td");
+//        System.out.println(lost);
+        Elements elements5 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-diff");
+        Elements diff = elements5.select("td");
+//        System.out.println(diff);
+        Elements elements6 = doc.getElementsByAttributeValue("class", "widget-match-standings__pts");
+        Elements points = elements6.select("td");
+//        System.out.println(points);
+        Elements elements7 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-for");
+        Elements goals = elements7.select("td");
+//        System.out.println(goals);
+        Elements elements8 = doc.getElementsByAttributeValue("class", "widget-match-standings__goals-against");
+        Elements goalLost = elements8.select("td");
+//        System.out.println(goalLost);
+
+//        List<CrawlingEntity6> crawlingEntityList6 = new ArrayList<>();
+//        for (int i = 0; i < elem2.size(); i++) {     // 반복문을 통해 저장처리
+//            Crawling6DTO craw6DTO = new Crawling6DTO();
+//            craw6DTO.setTeam(elem2.get(i).text());
+//            craw6DTO.setGames(games.get(i).text());
+//            craw6DTO.setWin(wins.get(i).text());
+//            craw6DTO.setDraw(draws.get(i).text());
+//            craw6DTO.setLose(lost.get(i).text());
+//            craw6DTO.setPlus(goals.get(i).text());
+//            craw6DTO.setMinus(goalLost.get(i).text());
+//            craw6DTO.setDiff(diff.get(i).text());
+//            craw6DTO.setPoint(points.get(i).text());
+////            crawlingEntityList2.add(CrawlingEntity2.toSaveEntity(craw2DTO));
+//            crawlingRepository6.save(CrawlingEntity6.toSaveEntity(craw6DTO));
+//
+//        }
+    }
+
+
+
+
 
     }
 

@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "craw_table")
 public class CrawlingEntity {
 
-//    @Override
+    //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
 //        if (o == null || getClass() != o.getClass()) return false;
@@ -29,7 +29,7 @@ public class CrawlingEntity {
 //    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Long id;
+    private Long id;
     @Column
     private String games;
 //    @Column
@@ -69,25 +69,27 @@ public class CrawlingEntity {
     @Column
     private String contents;
 
-    public static CrawlingEntity toSaveEntity(CrawlingDTO crawlingDTO){
-    CrawlingEntity crawlingEntity = new CrawlingEntity();
-    crawlingEntity.setName(crawlingDTO.getName());
-    crawlingEntity.setGames(crawlingDTO.getGames());
-    crawlingEntity.setTeam(crawlingDTO.getTeam());
-    crawlingEntity.setWin(crawlingDTO.getWin());
-    crawlingEntity.setLose(crawlingDTO.getLose());
-    crawlingEntity.setDraw(crawlingDTO.getDraw());
-    crawlingEntity.setPoint(crawlingDTO.getPoint());
-    crawlingEntity.setPlus(crawlingDTO.getPlus());
-    crawlingEntity.setMinus(crawlingDTO.getMinus());
-    crawlingEntity.setDiff(crawlingDTO.getDiff());
-//    crawlingEntity.setRanking(crawlingDTO.getRanking());
-    crawlingEntity.setContents(crawlingDTO.getContents());
-    crawlingEntity.setFileAttached(crawlingDTO.getFileAttached());
-    return  crawlingEntity;
+    @Column
+    private String ImageUrl;
 
+    public static CrawlingEntity toSaveEntity(CrawlingDTO crawlingDTO) {
+        CrawlingEntity crawlingEntity = new CrawlingEntity();
+        crawlingEntity.setName(crawlingDTO.getName());
+        crawlingEntity.setGames(crawlingDTO.getGames());
+        crawlingEntity.setTeam(crawlingDTO.getTeam());
+        crawlingEntity.setWin(crawlingDTO.getWin());
+        crawlingEntity.setLose(crawlingDTO.getLose());
+        crawlingEntity.setDraw(crawlingDTO.getDraw());
+        crawlingEntity.setPoint(crawlingDTO.getPoint());
+        crawlingEntity.setPlus(crawlingDTO.getPlus());
+        crawlingEntity.setMinus(crawlingDTO.getMinus());
+        crawlingEntity.setDiff(crawlingDTO.getDiff());
+//    crawlingEntity.setRanking(crawlingDTO.getRanking());
+//    crawlingEntity.setContents(crawlingDTO.getContents());
+//    crawlingEntity.setFileAttached(crawlingDTO.getFileAttached());
+//    crawlingEntity.setImageUrl(crawlingDTO.getImageUrl());
+        return crawlingEntity;
 
 
     }
-
 }

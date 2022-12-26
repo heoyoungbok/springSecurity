@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>crawling</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.mim.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .imgClass{
+            height: 100px;
+            width: 100px;
+        }
+        .pontClass{
+            font-size: 25px;
+        }
+    </style>
+
+</head>
+<body>
+<th:block th:replace="buttonHeader :: header"></th:block>
+<div class="container" id="admin-list">
+    <table class="table table-striped table-hover text-center">
+
+            <div><img th:src="@{/img/프리미어리그.png}" class="imgClass"></div>
+        <div class="pontClass">2022-2023 PremierLeague</div>
+
+
+        <th>순위</th>
+        <th></th>
+        <th>팀</th>
+        <th>게임수</th>
+        <th>승</th>
+        <th>무</th>
+        <th>패</th>
+        <th>득점</th>
+        <th>실점</th>
+        <th>승점</th>
+        <th>최근 5경기</th>
+
+
+        <tr th:each="craw :${crawList}">
+        <th th:text="${craw.id}"></th>
+            <th>
+                <img th:src="${imageUrls[craw.id -1]}" alt="Team logo">
+            </th>
+<!--                </tr>-->
+            </th>
+        <th th:text="${craw.team}"></th>
+            <th th:text="${craw.games}"></th>
+            <th th:text="${craw.win}"></th>
+            <th th:text="${craw.draw}"></th>
+            <th th:text="${craw.lose}"></th>
+            <th th:text="${craw.plus}"></th>
+            <th th:text="${craw.minus}"></th>
+            <th th:text="${craw.diff}"></th>
+            <th th:text="${craw.point}"></th>
+    </tr>
+    </table>
+
+</div>
+</body>
+<script>
+
+    // const ep1 = () => {
+    //     axios.get(`/api/data/0`)
+    //         .then((response) => {
+    //                 location.href = '/craw';
+    //
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
+    // const sp1 = () => {
+    //     axios.get('/api/data/1')
+    //         .then((response) => {
+    //             location.href="/l2";
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // };
+
+
+    // const links = document.querySelectorAll('a');
+    //
+    // links.forEach((link) => {
+    //     link.addEventListener('click', function(event) {
+    //         event.preventDefault();
+    //         const dataNo = this.getAttribute('data-no');
+    //
+    //         axios.get(`/api/data/${dataNo}`)
+    //             .then((response) => {
+    //                 displayData(dataNo);
+    //             })
+    //             .catch((error) => {
+    //                 console.error(error);
+    //             });
+    //     });
+    // });
+
+
+</script>
+</html>

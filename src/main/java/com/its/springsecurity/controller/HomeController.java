@@ -1,12 +1,6 @@
 package com.its.springsecurity.controller;
 
-import com.its.springsecurity.anntation.SocialUser;
-import com.its.springsecurity.entity.UserEntity;
-import com.its.springsecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,15 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-    private final UserRepository userRepository;
-//    private final UserEntity user;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Bean
-    public UserEntity userEntity() {
-        return new UserEntity();
-    }
+//    private final UserRepository userRepository;
+////    private final UserEntity user;
+//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Bean
+//    public User userEntity() {
+//        return new User();
+//    }
     @GetMapping("/")
-    public String index(){
+    public String getAuthorizationMessage(){
         return "index";
     }
 
@@ -31,22 +25,22 @@ public class HomeController {
 //        return "user";
 //    }
 
-    @GetMapping("/login")
+    @GetMapping("/login/OAuth2/code/google")
     public String login(){
         return "login";
     }
 
-    @GetMapping("/join")
-    public  String join() {
-        System.out.println("IndexController.java의 join");
-        return "join";
-
-    }
-    @GetMapping("/loginSuccess")
-    public String loginComplete(@SocialUser SecurityProperties.User user) {
-        return "redirect:/board";
-    }
-//        @PostMapping("/joinProc")
+//    @GetMapping("/join")
+//    public  String join() {
+//        System.out.println("IndexController.java의 join");
+//        return "join";
+//
+//    }
+//    @GetMapping("/loginSuccess")
+//    public String loginComplete(@SocialUser User user) {
+//        return "redirect:/leagueOne";
+//    }
+////        @PostMapping("/joinProc")
 //        public String joinProc(UserEntity user) {
 //            System.out.println("회원가입 진행합니다 여긴 Controller.IndexController.java의 joinProc의 시작  user= "+user);
 //            String rawPassword = user.getPassword();

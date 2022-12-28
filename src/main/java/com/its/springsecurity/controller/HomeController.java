@@ -1,13 +1,20 @@
 package com.its.springsecurity.controller;
 
+import com.its.springsecurity.config.auth.dto.SessionUser;
+import com.its.springsecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
+    private final UserService userService ;
+    private final HttpSession httpSession;
+
 //    private final UserRepository userRepository;
 ////    private final UserEntity user;
 //    private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -16,7 +23,15 @@ public class HomeController {
 //        return new User();
 //    }
     @GetMapping("/")
-    public String getAuthorizationMessage(){
+    public String index(Model model){
+            model.addAttribute("posts", userService.findAllDesc());
+
+            SessionUser user = (SessionUser) httpSession.getAttribute("user");
+
+            if(user != null){
+                model.addAttribute("userName", user.getName());
+            }
+
         return "index";
     }
 
@@ -25,7 +40,7 @@ public class HomeController {
 //        return "user";
 //    }
 
-    @GetMapping("/login/OAuth2/code/google")
+    @GetMapping("/login2")
     public String login(){
         return "login";
     }

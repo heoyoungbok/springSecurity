@@ -1,28 +1,46 @@
 package com.its.springsecurity.controller;
 
+import com.its.springsecurity.dto.SessionUser;
+import com.its.springsecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-//    private final UserService userService ;
-//    private final HttpSession httpSession;
+    private final UserService userService;
+    private final HttpSession httpSession;
 
-//    private final UserRepository userRepository;
+    //    private final UserRepository userRepository;
 ////    private final UserEntity user;
 //    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 //    @Bean
 //    public User userEntity() {
 //        return new User();
 //    }
-    @GetMapping("/login")
-    public String loginForm(){
-        return "login";
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("posts", userService.findAllDesc());
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("socialName", user.getName());
+
+            return "index";
+        }
+        return null;
     }
 
+        @GetMapping("/login")
+        public String loginForm () {
+            return "login";
+        }
 
+    }
 //    @GetMapping("/login1")
 //    public String login(Model model){
 //            model.addAttribute("posts", userService.findAllDesc());
@@ -41,10 +59,9 @@ public class HomeController {
 //        return "user";
 //    }
 
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
+
+
+
 
 //    @GetMapping("/join")
 //    public  String join() {
@@ -90,7 +107,7 @@ public class HomeController {
 //        Document doc = Jsoup.connect(url).get();
 //        Elements ele = doc.select("#container #content");
 //        ele.stream().forEach(name -> System.out.println("name.text() = " + name.text()));
-    }
+
 
 
 //    public static void main(String[] args) throws IOException {
@@ -116,7 +133,6 @@ public class HomeController {
 //                    .userAgent(USER_AGENT)
 //                    .method(Connection.Method.GET)
 //                    .ignoreContentType(true);
-
 
 
 

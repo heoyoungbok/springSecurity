@@ -15,6 +15,10 @@ public class HomeController {
     private final UserService userService;
     private final HttpSession httpSession;
 
+//    private static final String authorizationRequestBaseUri = "oauth2/authorization";
+//    Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
+//    private final ClientRegistrationRepository clientRegistrationRepository;
+
     //    private final UserRepository userRepository;
 ////    private final UserEntity user;
 //    private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -22,23 +26,31 @@ public class HomeController {
 //    public User userEntity() {
 //        return new User();
 //    }
+
+//   @GetMapping("/")
+//   public String home(){
+//       return "index";
+//   }
+
+
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("posts", userService.findAllDesc());
+//        model.addAttribute("posts", userService.findAllDesc());
 
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("socialName", user.getName());
 
-            return "index";
+
         }
-        return null;
+        return "login";
     }
 
-        @GetMapping("/login")
-        public String loginForm () {
-            return "login";
-        }
+
+//        @GetMapping("/login")
+//        public String loginForm () {
+//            return "login";
+//        }
 
     }
 //    @GetMapping("/login1")

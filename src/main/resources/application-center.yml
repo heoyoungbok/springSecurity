@@ -32,7 +32,8 @@ logging:
             sql:
               BasicBinder: trace
 
-#  profiles:
+
+          #  profiles:
 #    profiles:
 #      include: oauth
 

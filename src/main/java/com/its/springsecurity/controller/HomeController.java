@@ -31,11 +31,14 @@ public class HomeController {
 //   public String home(){
 //       return "index";
 //   }
-
+    @GetMapping("/login")
+    public String loginForm(){
+        return "login";
+    }
 
     @GetMapping("/")
     public String index(Model model) {
-//        model.addAttribute("posts", userService.findAllDesc());
+        model.addAttribute("posts", userService.findAllDesc());
 
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
@@ -46,7 +49,10 @@ public class HomeController {
         return "login";
     }
 
-
+//    @GetMapping("/posts/save")
+//    public String postsSave(){
+//        return "posts-save";
+//    }
 //        @GetMapping("/login")
 //        public String loginForm () {
 //            return "login";

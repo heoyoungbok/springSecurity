@@ -27,8 +27,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
 //    implementation 'org.springframework.boot:spring-boot-starter-jdbc
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.6.2'
-    implementation 'org.springframework.security:spring-security-oauth2-client:5.4.4'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.6.2'
+    implementation 'org.springframework.security:spring-security-crypto:5.5.8'
+//    implementation 'org.springframework.security:spring-security-oauth2-client:5.4.4'
     implementation 'com.github.scribejava:scribejava-core:2.8.1'
 //    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.2'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'

@@ -1,22 +1,40 @@
 package com.its.springsecurity.controller;
 
-import com.its.springsecurity.service.UserService;
-import lombok.RequiredArgsConstructor;
+import com.its.springsecurity.auth.PrincipalDetails;
+import com.its.springsecurity.domain.User;
+import com.its.springsecurity.domain.UserRepository;
+import com.its.springsecurity.domain.user.Role;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class HomeController {
-    private final UserService userService;
-    private final HttpSession httpSession;
+//    private final UserService userService;
+////    private final HttpSession httpSession;
+//    private final UserRepository userRepository;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 //    private static final String authorizationRequestBaseUri = "oauth2/authorization";
 //    Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
 //    private final ClientRegistrationRepository clientRegistrationRepository;
-
-    //    private final UserRepository userRepository;
+@Autowired
+        private  UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+//@Autowired
+// private PasswordEncoder passwordEncoder;
 ////    private final UserEntity user;
 //    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 //    @Bean
@@ -28,8 +46,81 @@ public class HomeController {
 //   public String home(){
 //       return "index";
 //   }
-//    @GetMapping("/login")
-//    public String loginForm() {
+    @GetMapping("/login")
+    public String loginForm() {
+        return "login";
+    }
+    @GetMapping("/joinForm")
+    public String joinForm(){
+        return "join";
+    }
+
+    @GetMapping("/user")
+    @ResponseBody
+    public String user(){
+        return "user";
+    }
+
+    @GetMapping("/manager")
+    @ResponseBody
+    public String manager(){
+        return "manager";
+    }
+
+    @GetMapping("/admin")
+    @ResponseBody
+    public String admin(){
+        return "admin";
+    }
+    @GetMapping("/oauth/loginInfo")
+    @ResponseBody
+    public String oauthLoginInfo(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2UserPrincipal){
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        System.out.println(attributes);
+        // PrincipalOauth2UserService의 getAttributes내용과 같음
+
+        Map<String, Object> attributes1 = oAuth2UserPrincipal.getAttributes();
+        // attributes == attributes1
+
+        return attributes.toString();     //세션에 담긴 user가져올 수 있음음
+    }
+
+    @GetMapping("/loginInfo")
+    @ResponseBody
+    public String loginInfo(Authentication authentication, @AuthenticationPrincipal PrincipalDetails principalDetails){
+        String result = "";
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+        if(principal.getUser().getProvider() == null) {
+            result = result + "Form 로그인 : " + principal;
+        }else{
+            result = result + "OAuth2 로그인 : " + principal;
+        }
+        return result;
+    }
+
+    @PostMapping("/join")
+    public String join(@ModelAttribute User user){
+        user.setRole(Role.USER);
+
+        String encodePwd = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodePwd);
+
+        userRepository.save(user);  //반드시 패스워드 암호화해야함
+        return "redirect:/loginForm";
+    }
+
+//    @GetMapping("/")
+//    public String index(Model model) {
+//        model.addAttribute("posts", userService.findAllDesc());
+//
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+//        if (user != null) {
+//            model.addAttribute("socialName", user.getName());
+//            return "index";
+//
+//        }
 //        return "login";
 //    }
 

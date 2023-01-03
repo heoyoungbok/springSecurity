@@ -1,11 +1,8 @@
 package com.its.springsecurity.controller;
 
-import com.its.springsecurity.dto.SessionUser;
 import com.its.springsecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,27 +24,15 @@ public class HomeController {
 //        return new User();
 //    }
 
-//   @GetMapping("/")
+    //   @GetMapping("/")
 //   public String home(){
 //       return "index";
 //   }
-    @GetMapping("/login")
-    public String loginForm(){
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String loginForm() {
+//        return "login";
+//    }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("posts", userService.findAllDesc());
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        if (user != null) {
-            model.addAttribute("socialName", user.getName());
-
-
-        }
-        return "login";
-    }
 
 //    @GetMapping("/posts/save")
 //    public String postsSave(){

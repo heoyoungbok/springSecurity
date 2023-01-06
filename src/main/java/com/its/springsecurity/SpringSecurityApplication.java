@@ -7,14 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringSecurityApplication {
 
-//    private final UserArgumentResolver userArgumentResolver;
-
-
-//    @Override
-//    protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
-//        super.addArgumentResolvers(argumentResolvers);
-//        argumentResolvers.add(userArgumentResolver);
-//    }
     public static void main(String[] args) {
         SpringApplication.run(SpringSecurityApplication.class, args);
     }

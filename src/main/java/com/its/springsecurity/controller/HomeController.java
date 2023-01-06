@@ -3,7 +3,6 @@ package com.its.springsecurity.controller;
 //import com.its.springsecurity.auth.PrincipalDetails;
 
 import com.its.springsecurity.config.auth.SessionUser;
-import com.its.springsecurity.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +25,11 @@ public class HomeController {
 //    private final ClientRegistrationRepository clientRegistrationRepository;
 
 
-    private final PostsService postsService;
+
 
 
     @GetMapping("/")
     public String index(Model model) {
-//        model.addAttribute("posts", postsService.findAllDesc());
 
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
 

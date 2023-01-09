@@ -4,18 +4,14 @@ import com.its.springsecurity.dto.*;
 import com.its.springsecurity.entity.*;
 import com.its.springsecurity.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -163,61 +159,61 @@ public class CrawlingService {
         }
 
 
-        String P1 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4dsgumo7d4zupm2ugsvm4zm4d.png";
-        String P2 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_a3nyxabgsqlnqfkeg41m6tnpp.png";
-        String P3 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_7vn2i2kd35zuetw6b38gw9jsz.png";
-        String P4 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_22doj4sgsocqpxw45h607udje.png";
-        String P5 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_6eqit8ye8aomdsrrq0hk3v7gh.png";
-        String P6 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_c8h9bw1l82s06h77xxrelzhur.png";
-        String P7 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_e5p0ehyguld7egzhiedpdnc3w.png";
-        String P8 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_9q0arba2kbnywth8bkxlhgmdr.png";
-        String P9 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_hzqh7z0mdl3v7gwete66syxp.png";
-        String P10 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_7yx5dqhhphyvfisohikodajhv.png";
-        String P11 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1c8m2ko0wxq1asfkuykurdr0y.png";
-        String P12 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_b496gs285it6bheuikox6z9mj.png";
-        String P13 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_avxknfz4f6ob0rv9dbnxdzde0.png";
-        String P14 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1pse9ta7a45pi2w2grjim70ge.png";
-        String P15 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_48gk2hpqtsl6p9sx9kjhaydq4.png";
-        String P16 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4txjdaqveermfryvbfrr4taf7.png";
-        String P17 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_ehd2iemqmschhj2ec0vayztzz.png";  // 해당 url 웹크롤링이 불가능 한 것 같아 직접 접근을 하여 복사
-        String P18 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1qtaiy11gswx327s0vkibf70n.png";
-        String P19 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_d5ydtvt96bv7fq04yqm2w2632.png";
-        String P20 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_b9si1jn1lfxfund69e9ogcu2n.png";
-        List<String> imageUrls = Arrays.asList(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20); //리스트에 담아줌
-
-
-        for (int i = 0; i < imageUrls.size(); i++) {   // 이미지 웹크롤링
-
-            String imageUrl = imageUrls.get(i);
-//            Element text = result.select(src.text()).get(i);
-//            System.out.println(text);
-            Connection.Response response = Jsoup.connect(imageUrl)
-                    .ignoreContentType(true)
-                    .userAgent("MyJavaClient/1.0")
-                    .method(Connection.Method.GET)
-                    .execute();
-
-
-            try (InputStream inputStream = response.bodyStream();
-                 FileOutputStream fos = new FileOutputStream("D://springboot_img//file.png" + (i + 1) + ".png")) {
-
-//            Connection.Response response =
-//                    (Connection.Response) Jsoup.connect(imageUrl).ignoreContentType(true).execute();
-                byte[] buffer = new byte[1024];
-                int n;
-                while ((n = inputStream.read(buffer)) != -1) {
-                    fos.write(buffer, 0, n);
-                }
-
-//            fos.write(imageData);
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                continue;
-            }
-
-        }
-
+//        String P1 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4dsgumo7d4zupm2ugsvm4zm4d.png";
+//        String P2 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_a3nyxabgsqlnqfkeg41m6tnpp.png";
+//        String P3 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_7vn2i2kd35zuetw6b38gw9jsz.png";
+//        String P4 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_22doj4sgsocqpxw45h607udje.png";
+//        String P5 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_6eqit8ye8aomdsrrq0hk3v7gh.png";
+//        String P6 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_c8h9bw1l82s06h77xxrelzhur.png";
+//        String P7 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_e5p0ehyguld7egzhiedpdnc3w.png";
+//        String P8 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_9q0arba2kbnywth8bkxlhgmdr.png";
+//        String P9 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_hzqh7z0mdl3v7gwete66syxp.png";
+//        String P10 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_7yx5dqhhphyvfisohikodajhv.png";
+//        String P11 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1c8m2ko0wxq1asfkuykurdr0y.png";
+//        String P12 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_b496gs285it6bheuikox6z9mj.png";
+//        String P13 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_avxknfz4f6ob0rv9dbnxdzde0.png";
+//        String P14 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1pse9ta7a45pi2w2grjim70ge.png";
+//        String P15 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_48gk2hpqtsl6p9sx9kjhaydq4.png";
+//        String P16 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4txjdaqveermfryvbfrr4taf7.png";
+//        String P17 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_ehd2iemqmschhj2ec0vayztzz.png";  // 해당 url 웹크롤링이 불가능 한 것 같아 직접 접근을 하여 복사
+//        String P18 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_1qtaiy11gswx327s0vkibf70n.png";
+//        String P19 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_d5ydtvt96bv7fq04yqm2w2632.png";
+//        String P20 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_b9si1jn1lfxfund69e9ogcu2n.png";
+//        List<String> imageUrls = Arrays.asList(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20); //리스트에 담아줌
+//
+//
+//        for (int i = 0; i < imageUrls.size(); i++) {   // 이미지 웹크롤링
+//
+//            String imageUrl = imageUrls.get(i);
+////            Element text = result.select(src.text()).get(i);
+////            System.out.println(text);
+//            Connection.Response response = Jsoup.connect(imageUrl)
+//                    .ignoreContentType(true)
+//                    .userAgent("MyJavaClient/1.0")
+//                    .method(Connection.Method.GET)
+//                    .execute();
+//
+//
+//            try (InputStream inputStream = response.bodyStream();
+//                 FileOutputStream fos = new FileOutputStream("D://springboot_img//file.png" + (i + 1) + ".png")) {
+//
+////            Connection.Response response =
+////                    (Connection.Response) Jsoup.connect(imageUrl).ignoreContentType(true).execute();
+//                byte[] buffer = new byte[1024];
+//                int n;
+//                while ((n = inputStream.read(buffer)) != -1) {
+//                    fos.write(buffer, 0, n);
+//                }
+//
+////            fos.write(imageData);
+//                fos.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                continue;
+//            }
+//
+//        }
+//
 
 
     }

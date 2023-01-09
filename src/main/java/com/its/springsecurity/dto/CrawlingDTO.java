@@ -31,10 +31,6 @@ public class CrawlingDTO {
     private String diff;
 
 
-//    public CrawlingDTO() {
-//
-//    }
-
 
     public static CrawlingDTO coDTO(CrawlingEntity crawlingEntity){
     CrawlingDTO crawlingDTO = new CrawlingDTO();

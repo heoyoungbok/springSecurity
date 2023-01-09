@@ -49,6 +49,8 @@ public class CrawlingController {
 //
         model.addAttribute("imageUrls", imageUrls);
 //        model.addAttribute("imageUrls",imageUrls);
+
+
         return "LeagueOne";
     }
 //    @GetMapping("/l2")

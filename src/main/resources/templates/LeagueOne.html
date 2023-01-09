@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>crawling</title>
@@ -26,7 +26,7 @@
     <div><img th:src="@{/img/프리미어리그.png}" class="imgClass"></div>
     <div class="pontClass">2022-2023 PremierLeague</div>
 </div>
-<div class="container" id="admin-list">
+<div class="container" id="admin-list" sec:authorize="isAuthenticated()" >
     <table class="table table-striped table-hover text-center">
 
         <th>순위</th>

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -127,79 +128,41 @@ public class CrawlingService {
 //        Set<CrawlingEntity> uniqueContents = new HashSet<>();    // td에 대한 전체 포문
         CrawlingDTO crawlingDTO1 = new CrawlingDTO();
         CrawlingEntity entity = new CrawlingEntity();
-//        for (int i = 0; i < tNames.size(); i++) {
-//            Element result;
-//            result = tNames.get(i);
-//            String result1 = result.text();
-//            crawlingDTO1.setTeam(result1);
-//            uniqueContents.add(entity);
-//            CrawlingEntity crawlingEntity = CrawlingEntity.toSaveEntity(crawlingDTO1);
-//
-//            // 같은 이름이 중복될시 저장되는 건 미확인
-//            for (CrawlingEntity crawling : uniqueContents) {
-//                crawlingRepository.save(crawling);
-//
-////                String textResult = result.
-////                System.out.println(result1);
-//
-////        List<Elements> crawlingDTOList = Arrays.asList(elem2,games,wins,draws,lost,goals,goalLost,diff,points);
-//
-//
-//        List<CrawlingEntity> crawlingEntityList = new ArrayList<>();
-//        for (int i = 0; i < elem2.size(); i++) {     // 반복문을 통해 저장처리
-//            CrawlingDTO crawDTO = new CrawlingDTO();
-//            crawDTO.setTeam(elem2.get(i).text());
-//            crawDTO.setGames(games.get(i).text());
-//            crawDTO.setWin(wins.get(i).text());
-//            crawDTO.setDraw(draws.get(i).text());
-//            crawDTO.setLose(lost.get(i).text());
-//            crawDTO.setPlus(goals.get(i).text());
-//            crawDTO.setMinus(goalLost.get(i).text());
-//            crawDTO.setDiff(diff.get(i).text());
-//            crawDTO.setPoint(points.get(i).text());
-////            crawlingEntityList.add(CrawlingEntity.toSaveEntity(crawDTO));
-//            crawlingRepository.save(CrawlingEntity.toSaveEntity(crawDTO));
-//        }
 
 
-//        for (int i = 0; i < src.size(); i++) {
-//            Element result = src.get(i);
-//            System.out.println(result);
-////            // src 속성 값에서 파일 이름을 잘라냄
-////            String url = result.attr("src");
-////            String[] splitUrl = result.attr("src").split("/");
-////            String fileName = splitUrl[splitUrl.length-1];
-////            // 파일 다운로드
-////
-////            this.saveAttach(url,fileName,sessinId);
-////            // img 태그의 src 속성을 다운로드한 파일로 수정
-////
-////            result.attr("src",fileName);
-//        }
-//
-//        String nUrl = "https://sports.news.naver.com/wfootball/record/index?category=epl&year=2022&tab=team";
-//        Document document = Jsoup.connect(nUrl).get();
-//        Elements elements = document.getElementsByAttributeValue("class","record_tbl");
-//        Elements elem1 = elements.select("table tbody");
-//        Elements TR = elem1.select("tr td");
-//        Elements elem2 = document.getElementsByAttributeValue("class","inner");
-//        Elements bImg = elem2.select("img");
-//        System.out.println(bImg);
+        List<CrawlingEntity> crawlingEntityList = new ArrayList<>();
+        for (int i = 0; i < elem2.size(); i++) {     // 반복문을 통해 저장처리
+            CrawlingDTO crawDTO = new CrawlingDTO();
+            crawDTO.setTeam(elem2.get(i).text());
+            crawDTO.setGames(games.get(i).text());
+            crawDTO.setWin(wins.get(i).text());
+            crawDTO.setDraw(draws.get(i).text());
+            crawDTO.setLose(lost.get(i).text());
+            crawDTO.setPlus(goals.get(i).text());
+            crawDTO.setMinus(goalLost.get(i).text());
+            crawDTO.setDiff(diff.get(i).text());
+            crawDTO.setPoint(points.get(i).text());
+//            crawlingEntityList.add(CrawlingEntity.toSaveEntity(crawDTO));
+
+            CrawlingEntity existingEntity = crawlingRepository.findByTeam(crawDTO.getTeam());
+            if (existingEntity != null) {
+                // Update the existing entry with the new values
+                existingEntity.setGames(crawDTO.getGames());
+                existingEntity.setWin(crawDTO.getWin());
+                existingEntity.setDraw(crawDTO.getDraw());
+                existingEntity.setLose(crawDTO.getLose());
+                existingEntity.setPlus(crawDTO.getPlus());
+                existingEntity.setMinus(crawDTO.getMinus());
+                existingEntity.setDiff(crawDTO.getDiff());
+                existingEntity.setPoint(crawDTO.getPoint());
+                crawlingRepository.save(existingEntity);
+            } else {
+                // Save a new entry to the database
+                crawlingRepository.save(CrawlingEntity.toSaveEntity(crawDTO));
+            }
+        }
 
 
-        //
-//        String savePath = "file:///D:/springboot_img/";
-//        File dir = new File(savePath);
-//        if (!dir.exists()){
-//            dir.mkdir();
-//        }
-//            Element result = img.get(i);
-//        try {
-//            doc = Jsoup.connect(u).get();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return;
         String P1 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4dsgumo7d4zupm2ugsvm4zm4d.png";
         String P2 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_a3nyxabgsqlnqfkeg41m6tnpp.png";
         String P3 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_7vn2i2kd35zuetw6b38gw9jsz.png";
@@ -255,107 +218,6 @@ public class CrawlingService {
 
         }
 
-
-        //
-//            String fileUrl = td1Elements.attr("src");
-//            URL url = new URL(u+fileUrl);
-//            URLEncoder.encode(u);
-////            try {
-////
-//////                url = new URL(fileUrl);
-////            } catch (MalformedURLException e) {
-////                e.printStackTrace();
-////                continue;
-////            }
-//
-//
-//
-//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                connection.setRequestMethod("GET");
-//                connection.setRequestProperty("User-Agent",",MyJavaClient/1.0");
-//                connection.connect();
-////                int responseCode = connection.getResponseCode();
-////                String responseMessage = connection.getResponseMessage();
-////                Map<String,List<String>> headers = connection.getHeaderFields();
-//
-//
-////            InputStream in;
-//
-//            try (InputStream inputStream = connection.getInputStream();
-//                FileOutputStream fos = new FileOutputStream("D://springboot_img//file.png" + (i + 1) + ".png")) {
-//                int contentLength = 0;
-//                byte[] buffer = new byte[1024];
-//                int n;
-//
-//
-//                while ((n = inputStream.read(buffer)) != -1) {
-//                    contentLength += n;
-//                    fos.write(buffer,0,n);
-//                }
-////                    connection.setRequestProperty("Content-Length", Integer.toString(contentLength));
-//                connection.setRequestProperty("Accept-Encoding", "gzip");
-////                    fos.write(buffer, 0, n); // 저장 쿼리
-//
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                continue;
-//            } finally {
-//                connection.disconnect();
-//            }
-
-
-//            String imgResult = img.get(i).attr("src");
-
-
-//            String fileUrl = img.attr("src");  // get the src attribute of the image element
-//            URL url = new URL(fileUrl);  // create a URL object from the fileUrl
-//
-//
-////
-////
-////
-////            System.out.println(fileUrl);
-////            System.out.println(img);
-//// open a connection to the URL
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("GET");  // set the request method to GET
-//
-//// get the input stream from the connection and read the file contents
-//            InputStream in = connection.getInputStream();
-//            byte[] buffer = new byte[4096];
-//            int n;
-//
-//// create a file output stream to write the file to disk
-//            FileOutputStream fos = new FileOutputStream("D://springboot_img//file.png"+(i+1)+".png");
-//
-//
-//
-//            while ((n = in.read(buffer)) > 0) {
-//                fos.write(buffer, 0, n);
-//            }
-//
-//// close the streams
-//            fos.close();
-//            in.close();
-//            connection.disconnect();
-//        }
-//
-//
-
-
-//        crawlingDTO1.setContents(textResult);
-
-//
-//        String textTest1 = elements.text();
-
-//        File file = new File("text.html");
-//        Document document = Jsoup.parse(file,"utf-8");
-//        System.out.println(document);
-//        Elements elements = document.getElementsByAttributeValue("class","widget-match-standings__crest");
-//        elements.forEach(el ->{
-//            System.out.println(el);
-//        });
 
 
     }

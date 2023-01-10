@@ -39,6 +39,10 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/squad")
+    public String squad(){
+        return "SquadMaker";
+    }
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;

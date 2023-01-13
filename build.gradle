@@ -33,9 +33,19 @@ dependencies {
     implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7.1'
     implementation 'com.auth0:java-jwt:3.10.3'
-
+    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.10.RELEASE'
+    implementation('com.google.apis:google-api-services-drive:v3-rev20221219-2.0.0')
+    implementation('com.google.apis:google-api-services-sheets:v4-rev20221216-2.0.0')
+    implementation('com.google.auth:google-auth-library-oauth2-http:1.14.0')
+    implementation('com.google.http-client:google-http-client-jackson2:1.42.3')
+    implementation('org.apache.poi:poi:5.2.2')
+    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-client:5.4.2'
+    implementation 'org.springframework.security:spring-security-config'
+    implementation 'org.springframework.security:spring-security-web'
+    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.4.0'
+    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Squad maker</title>
+    <script th:src="@{/js/jquery.mim.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+
+       .container {
+            background-image:
+                  url("https://st.depositphotos.com/2775971/3455/v/600/depositphotos_34558847-stock-illustration-soccer-field-illustration.jpg");
+            height: 2500px;
+            background-repeat:no-repeat;
+            background-position:center top;
+            background-size: 2300px;
+        }
+
+
+        #ST{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 200px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: 140px;
+            left: 840px;
+            width: 10%;
+            position: relative;
+
+        }
+
+
+        #LW{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -20px;
+            left: 535px;
+            width: 10%;
+            position: relative;
+
+        }
+
+
+        #RW{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -240px;
+            left: 1145px;
+            width: 10%;
+            position: relative;
+
+        }
+
+
+
+
+        #GK{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -1250px;
+            right: 8px;
+            position: relative;
+        }
+        #LM{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -220px;
+            left: 620px;
+            width: 10%;
+            position: relative;
+        }
+        #RM{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -430px;
+            left: 1059px;
+            width: 10%;
+            position: relative;
+        }
+        #CM{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -600px;
+            left:  845px;
+            width: 10%;
+            position: relative;
+        }
+
+        #LCB{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -550px;
+            left: 600px;
+            width: 10%;
+            position: relative;
+        }
+        #RCB{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -770px;
+            left: 1080px;
+            width: 10%;
+            position: relative;
+        }
+        #LB{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -1200px;
+            left: 200px;
+            width: 10%;
+            position: relative;
+        }
+        #RB{
+            background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
+            height: 220px;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size: contain;
+            top: -1000px;
+            left: 1500px;
+            width: 10%;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="container-1">
+    <div class="position" id="ST" onclick="openPlayerWindow('ST')">
+        <img id="ST-image">
+            <div id="ST-name"></div>
+
+    </div>
+    </div>
+    <div class="container-2">
+    <div class="position" id="LW" onclick="openPlayerWindow('LW')">
+        <img id="LW-image">
+        <div id="LW-name"></div>
+
+    </div>
+    </div>
+    <div class="position" id="RW" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="LM" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="RM" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="CM" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="LCB" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="RCB" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="RB" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="LB" onclick="openPlayerWindow()">
+
+    </div>
+    <div class="position" id="GK" onclick="openPlayerWindow()">
+
+    </div>
+
+</div>
+
+</body>
+
+
+<script>
+
+
+        // Get the value of the selected position
+
+
+        // Send the selected position to the child window
+        function openPlayerWindow() {
+            window.open('/player', 'FootballPlayer', 'width=600,height=600');
+            let name = document.getElementById("name").innerHTML;
+            let image = document.getElementById("img").src;
+
+            if (position === 'ST') {
+                document.getElementById("ST-name").innerHTML = document.getElementById("name").innerHTML;
+                document.getElementById("ST-image").src =document.getElementById("img").src;
+            } else if (position === 'LW') {
+                document.getElementById("LW-name").innerHTML = document.getElementById("name").innerHTML;
+                document.getElementById("LW-image").src=document.getElementById("img").src;
+            }
+            // Repeat for other positions
+
+
+
+
+
+
+}
+</script>
+
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#ST" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+
+<!--    // function previewFile() {-->
+<!--    //     var file    = document.querySelector('#input-img').files[0];-->
+<!--    //     var path = file.name;-->
+<!--    //     /* You can now use the path variable to set the background-image property */-->
+<!--    //     $("#ST").css("background-image", "url(@{/static/img/"+path+"})");-->
+<!--    // }-->
+
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#CAM" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#CDM" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#CB" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#SW" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#RB" ).draggable();-->
+<!--    //-->
+<!--    // } );    $( function() {-->
+<!--    //-->
+<!--    //     $( "#LB" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#LWB" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#RWB" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#LW" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#RW" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+<!--    //-->
+<!--    // $( function() {-->
+<!--    //-->
+<!--    //     $( "#CM" ).draggable();-->
+<!--    //-->
+<!--    // } );-->
+
+
+
+</html>

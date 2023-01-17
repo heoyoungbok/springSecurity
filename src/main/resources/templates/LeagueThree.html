@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LeagueThree</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<style>
+    .imgClass{
+        height: 100px;
+        width: 100px;
+    }
+    .pontClass{
+        font-size: 25px;
+    }
+</style>
+
+<body>
+<th:block th:replace="buttonHeader :: header"></th:block>
+<div class="container" id="admin-list">
+<table class="table table-striped table-hover text-center">
+
+       <div> <img th:src="@{/img/분데스리가.png}" class="imgClass"></div>
+
+
+        <div class="pontClass">2022-2023 Bundesliga</div>
+
+    <th>순위</th>
+    <th></th>
+    <th>팀</th>
+    <th>게임수</th>
+    <th>승</th>
+    <th>무</th>
+    <th>패</th>
+    <th>득점</th>
+    <th>실점</th>
+    <th>승점</th>
+    <th>최근 5경기</th>
+
+
+    <tr th:each="craw3 :${crawList3}">
+        <th th:text="${craw3.id}"></th>
+        <th>
+            <img th:src="${imageUrls[craw3.id -1]}" alt="Team logo">
+        </th>
+        <!--                </tr>-->
+        </th>
+        <th th:text="${craw3.team}"></th>
+        <th th:text="${craw3.games}"></th>
+        <th th:text="${craw3.win}"></th>
+        <th th:text="${craw3.draw}"></th>
+        <th th:text="${craw3.lose}"></th>
+        <th th:text="${craw3.plus}"></th>
+        <th th:text="${craw3.minus}"></th>
+        <th th:text="${craw3.diff}"></th>
+        <th th:text="${craw3.point}"></th>
+    </tr>
+</table>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.mim.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+<div class="container" id="admin-list">
+    <table class="table table-striped table-hover text-center">
+        <th>선수 정보</th>
+
+        <tr th:each="player : ${playerList}">
+            <td>
+                <img th:src="@{'/player/p' + ${player.id} +'.png'}" alt="" id="img">
+
+            </td>
+            <th th:text="${player.name}" id="name"></th>
+            <td>
+                <button id="select-player" th:attr="data-name=${player.name},data-image='/player/p' + ${player.id} + '.png'" onclick="sendPlayerData(event)">Select</button>
+            </td>
+        </tr>
+
+    </table>
+</div>
+</body>
+<script>
+
+
+    const sendPlayerData = (event) => {
+        let name = event.target.dataset.name;
+        let image = event.target.dataset.image;
+        if (window.opener) {
+
+            opener.document.getElementById("ST-name").innerHTML = name;
+            opener.document.getElementById("ST-image").src = image;
+
+            // Repeat for other positions
+            window.close();
+        }
+
+
+    }
+
+
+
+
+</script>
+</html>

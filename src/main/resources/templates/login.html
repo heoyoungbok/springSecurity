@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+<!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
+
+
+    <ul>
+<!--        <li>-->
+<!--            &lt;!&ndash; 아래와같이 아이디를 꼭 써준다. &ndash;&gt;-->
+<!--            <a id="naverIdLogin_loginButton" href="javascript:void(0)">-->
+<!--                <span>네이버 로그인</span>-->
+<!--            </a>-->
+<!--        </li>-->
+        <li onclick="naverLogout(); return false;">
+            <a href="javascript:void(0)">
+                <span>네이버 로그아웃</span>
+            </a>
+        </li>
+    </ul>
+
+    <div id="naverIdLogin" >
+
+        <a href="/logout" class="btn btn-outline-dark">로그아웃</a>
+        <a href="/modify" class="btn btn-outline-dark bi bi-gear"></a>
+
+        <a href="/oauth2/authorization/naver" role="button" class="btn btn-outline-danger bi bi-google"><img src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.1" height="50"></a>
+    </div>
+
+<!--    <div class="g-signin2"data-onsuccess="onSignIn"></div>-->
+<!--    <a href="#" onclick="signOut();">Sign out</a>-->
+
+<!--    <ul>-->
+<!--        <li id="GgCustomLogin">-->
+<!--            <a href="javascript:void(0)">-->
+<!--                <span>Login with Google</span>-->
+<!--            </a>-->
+<!--        </li>-->
+<!--    </ul>-->
+
+
+    <script>
+
+            var testPopUp;
+        function openPopUp() {
+            testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+        }
+        function closePopUp(){
+            testPopUp.close();
+        }
+
+        function naverLogout() {
+            openPopUp();
+            setTimeout(function() {
+                closePopUp();
+            }, 1000);
+
+
+        }
+
+
+
+        // function onSignIn(googleUser) {
+        //     var profile = googleUser.getBasicProfile();
+        //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        //     console.log('Name: ' + profile.getName());
+        //     console.log('Image URL: ' + profile.getImageUrl());
+        //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        // }
+        //
+        // function signOut(){
+        //     var auth2 = gapi.auth2.getAuthInstance();
+        //     auth2.signOut().then(function () {
+        //         console.log('User signed out.');
+        //     })
+        // }
+        //
+        //
+        //
+        // // function init() {
+        //     gapi.load('auth2', function() {
+        //         gapi.auth2.init();
+        //         options = new gapi.auth2.SigninOptionsBuilder();
+        //         options.setPrompt('select_account');
+        //         // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
+        //         options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
+        //         // 인스턴스의 함수 호출 - element에 로그인 기능 추가
+        //         // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
+        //         gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
+        //     })
+        // }
+        //
+        // function onSignIn(googleUser) {
+        //     var access_token = googleUser.getAuthResponse().access_token
+        //     $.ajax({
+        //         // people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
+        //         url: 'https://people.googleapis.com/v1/people/me'
+        //         // key에 자신의 API 키를 넣습니다.
+        //         , data: {personFields:'birthdays', key:'AIzaSyChgwbbmcl7s78HMkUlPrHFSWl2-7-oeMQ', 'access_token': access_token}
+        //         , method:'GET'
+        //     })
+        //         .done(function(e){
+        //             //프로필을 가져온다.
+        //             var profile = googleUser.getBasicProfile();
+        //             console.log(profile)
+        //         })
+        //         .fail(function(e){
+        //             console.log(e);
+        //         })
+        // }
+        // function onSignInFailure(t){
+        //     console.log(t);
+        // }
+        // function renderButton() {
+        //     gapi.signin2.render('gSignIn', {
+        //         'scope': 'profile email',
+        //         'width': 240,
+        //         'height': 50,
+        //         'longtitle': true,
+        //         'theme': 'dark',
+        //         'onsuccess': onSuccess,
+        //         'onfailure': onFailure
+        //     });
+        // }
+        //
+        // function onSuccess(googleUser) {
+        //     // Get the Google profile data (basic)
+        //     //var profile = googleUser.getBasicProfile();
+        //
+        //     // Retrieve the Google account data
+        //     gapi.client.load('oauth2', 'v2', function () {
+        //         var request = gapi.client.oauth2.userinfo.get({
+        //             'userId': 'me'
+        //         });
+        //         request.execute(function (resp) {
+        //             // Display the user details
+        //             var profileHTML = '<h3>Welcome '+resp.given_name+'! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></h3>';
+        //             profileHTML += '<img src="'+resp.picture+'"/><p><b>Google ID: </b>'+resp.id+'</p><p><b>Name: </b>'+resp.name+'</p><p><b>Email: </b>'+resp.email+'</p><p><b>Gender: </b>'+resp.gender+'</p><p><b>Locale: </b>'+resp.locale+'</p><p><b>Google Profile:</b> <a target="_blank" href="'+resp.link+'">click to view profile</a></p>';
+        //             document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
+        //
+        //             document.getElementById("gSignIn").style.display = "none";
+        //             document.getElementsByClassName("userContent")[0].style.display = "block";
+        //
+        //             // Save user data
+        //             saveUserData(resp);
+        //         });
+        //     });
+        // }
+        // function onFailure(error) {
+        //     alert(error);
+        // }
+        // function saveUserData(userData) {
+        //     axios.post('/api/saveUser', {
+        //         oauth_provider: 'google',
+        //         userData: userData
+        //     })
+        //         .then(function (response) {
+        //             window.location.href = '/index';
+        //             console.log(response);
+        //         })
+        //         .catch(function (error) {
+        //             console.log(error);
+        //             alert('Failed to log in. Please try again.');
+        //         });
+        // }
+        // // Save user data to the database
+        // // function saveUserData(userData){
+        // //     $.post('userData.php', { oauth_provider:'google', userData: JSON.stringify(userData) });
+        // // }
+        // function signOut() {
+        //     var auth2 = gapi.auth2.getAuthInstance();
+        //     auth2.signOut().then(function () {
+        //         document.getElementsByClassName("userContent")[0].innerHTML = '';
+        //         document.getElementsByClassName("userContent")[0].style.display = "none";
+        //         document.getElementById("gSignIn").style.display = "block";
+        //     });
+        //
+        //     auth2.disconnect();
+        // }
+
+    </script>
+</head>
+<style>
+
+</style>
+<body>
+
+<div class="container">
+
+</div>
+
+
+</body>
+
+<script>
+
+</script>
+<
+</html>

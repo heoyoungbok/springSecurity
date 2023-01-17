@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="header">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+</head>
+    <style>
+
+        body:before{
+            content:'';
+            height:70%;
+            display:inline-block;
+            vertical-align:middle;
+        }
+        button{
+            background:#1AAB8A;
+            color:#fff;
+            border:none;
+            position:relative;
+            height:30px;
+            font-size:1.48em;
+            padding:0 2em;
+            cursor:pointer;
+            transition:800ms ease all;
+            outline:none;
+
+
+        }
+        button:hover{
+            background:#fff;
+            color:#1AAB8A;
+
+        }
+        button:before,button:after{
+            content:'';
+            position:absolute;
+            top:0;
+            right:0;
+            height:2px;
+            width:0;
+            background: #1AAB8A;
+            transition:400ms ease all;
+            vertical-align: middle;
+        }
+        button:after{
+            right:inherit;
+            top:inherit;
+            left:0;
+            bottom:0;
+        }
+        button:hover:before,button:hover:after{
+            width:100%;
+            transition:800ms ease all;
+        }
+        .container {
+            /*display: flex;*/
+            align-items: center;
+        }
+    </style>
+<body>
+<div class="container dropdown">
+    <button href="#" th:onclick="|location.href='@{/craw}'|" data-no="0" class="active">프리미어리그</button>
+    <button href="#" th:onclick="|location.href='@{/l2}'|" data-no="1" class="active">프리메라리그</button>
+    <button href="#" th:onclick="|location.href='@{/l3}'|" data-no="2" class="active">분데스리가</button>
+    <button href="#" th:onclick="|location.href='@{/l4}'|" data-no="3" class="active">세리에A</button>
+    <button href="#" th:onclick="|location.href='@{/l5}'|" data-no="4" class="active">에레디비시</button>
+    <button href="#" th:onclick="|location.href='@{/l6}'|" data-no="5" class="active">리그앙</button>
+
+</div>
+<span class="mx-3">{{user}}님 안녕하세요!</span>
+
+</body>
+</th:block>
+    <script>
+    </script>
+</html>

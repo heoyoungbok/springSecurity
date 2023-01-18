@@ -47,7 +47,7 @@
         if (window.opener) {
             window.opener.postMessage({name: name, image: image}, "*");
         }
-
+        window.close();
     }
 
 

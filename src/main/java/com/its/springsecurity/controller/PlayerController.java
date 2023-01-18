@@ -54,34 +54,34 @@ public class PlayerController {
         return "FootballPlayer";
     }
 
-    @GetMapping("/player2")
-    public String player2(Model model) throws IOException{
-
-        File file = new File("D:\\springboot_img\\선수2.txt");
-
-        String jsonString = new String(Files.readAllBytes(file.toPath()));
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<PlayerDTO> playerList = objectMapper.readValue(jsonString, new TypeReference<>() {
-        });
-
-//        for (PlayerDTO player : playerList) {
-//            player.setImageUrl("file:///D:/footballplayer/p" + player.getId() + ".png");
-//        }
-
-
-
-        // Add the list of PlayerDTO objects to the model and pass it to the view template
-        model.addAttribute("playerList", playerList);
-//        List<String> imageUrls = new ArrayList<>();
-//        for (int i = 0; i < playerList.size(); i++) {
-//            PlayerDTO player = playerList.get(i);
-//            String imageUrl = img.get(i).attr("src");
-//            imageUrls.add(imageUrl);
-//        }
+//    @GetMapping("/player2")
+//    public String player2(Model model) throws IOException{
 //
-//        model.addAttribute("imageUrls",imageUrls);
-        return "FootballPlayer2";
-    }
+//        File file = new File("D:\\springboot_img\\선수2.txt");
+//
+//        String jsonString = new String(Files.readAllBytes(file.toPath()));
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        List<PlayerDTO> playerList = objectMapper.readValue(jsonString, new TypeReference<>() {
+//        });
+//
+////        for (PlayerDTO player : playerList) {
+////            player.setImageUrl("file:///D:/footballplayer/p" + player.getId() + ".png");
+////        }
+//
+//
+//
+//        // Add the list of PlayerDTO objects to the model and pass it to the view template
+//        model.addAttribute("playerList", playerList);
+////        List<String> imageUrls = new ArrayList<>();
+////        for (int i = 0; i < playerList.size(); i++) {
+////            PlayerDTO player = playerList.get(i);
+////            String imageUrl = img.get(i).attr("src");
+////            imageUrls.add(imageUrl);
+////        }
+////
+////        model.addAttribute("imageUrls",imageUrls);
+//        return "FootballPlayer2";
+//    }
 
 
 

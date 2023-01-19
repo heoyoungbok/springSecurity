@@ -113,6 +113,11 @@ public class PlayerService {
         return playerDTOList;
     }
 
+    public void save(PlayerDTO playerDTO) {
+     playerRepository.save(PlayerEntity.toSaveEntity(playerDTO));
+
+    }
+
 //    public List<PlayerDTO> findUrls() {
 //        List<PlayerEntity> playerEntityList = playerRepository.findAll();
 //        List<PlayerDTO> playerDTOList = playerEntityList.stream()

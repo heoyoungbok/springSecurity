@@ -158,7 +158,8 @@
 </head>
 <body>
 
-
+<div class="table-hover">
+   <input type="button" value="스쿼드 저장" onclick="savePlayerData()">
 <div class="container">
     <div class="container-1">
         <div class="position" id="ST-position" onclick="openPlayerWindow('ST')">
@@ -238,6 +239,7 @@
 
 </div>
 </div>
+</div>
 </body>
 
 
@@ -310,47 +312,21 @@
                 // other cases
             }
 
-            // if (document.getElementById(positionId + "-name") !== null) {
-            //     document.getElementById(positionId + "-name").innerHTML = name;
-            // }
-            // if (document.getElementById(positionId + "-image") !== null) {
-            //     document.getElementById(positionId + "-image").src = image;
-            // }
-
-            // Update the parent window's elements with the player data
-            // document.getElementById("player-name").innerHTML = name;
-            // document.getElementById("player-image").src = image;
         }
     }
-    //
-    //     function openPlayerWindow1(positionId) {
-    //         // Function to handle the click event on a position element
-    //
-    //         window.open('/player', 'FootballPlayer', 'width=600,height=600');
-    //
-    //         window.removeEventListener("message", receiveMessage);
-    //         window.addEventListener("message", receiveMessage);
-    //
-    //         function receiveMessage(event) {
-    //             let name = event.data.name;
-    //             let image = event.data.image;
-    //
-    //
-    //             if (document.getElementById(positionId + "-name") !== null) {
-    //                 document.getElementById(positionId + "-name").innerHTML = name;
-    //             }
-    //             if (document.getElementById(positionId + "-image") !== null) {
-    //                 document.getElementById(positionId + "-image").src = image;
-    //             }
-    //
-    //             // Update the parent window's elements with the player data
-    //             // document.getElementById("player-name").innerHTML = name;
-    //             // document.getElementById("player-image").src = image;
-    //
-    //         }
-    //     }
-    // }
-
+    const savePlayerData = (name, image, position) => {
+        axios.post('/api/players', {
+            name: name,
+            image: image,
+            position: position
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 </script>
 
 

@@ -48,5 +48,8 @@ public class User extends BaseTimeEntity {
         return this.role.getKey();
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

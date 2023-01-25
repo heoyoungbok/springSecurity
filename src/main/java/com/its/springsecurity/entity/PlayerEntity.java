@@ -26,6 +26,9 @@ public class PlayerEntity {
 //    @Column(name = "image_url")
     private String imageUrl;
 
+    private String title;
+
+
 
 //
 
@@ -36,6 +39,12 @@ public class PlayerEntity {
         playerEntity.setName(playerDTO.getName());
         playerEntity.setPosition(playerDTO.getPosition());
         playerEntity.setImageUrl(playerDTO.getImageUrl());
+        playerEntity.setTitle(playerDTO.getTitle());
+
+
         return playerEntity;
     }
+
+
+
 }

@@ -20,6 +20,9 @@ public class PlayerDTO {
 
     private String imageUrl;
 
+    private String title;
+
+
 
 
 
@@ -57,6 +60,8 @@ public class PlayerDTO {
         playerDTO.setName(playerEntity.getName());
         playerDTO.setPosition(playerEntity.getPosition());
         playerDTO.setImageUrl(playerEntity.getImageUrl());
+        playerDTO.setTitle(playerEntity.getTitle());
+
 
 
         return playerDTO;

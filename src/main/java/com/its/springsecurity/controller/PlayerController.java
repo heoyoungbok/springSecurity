@@ -3,7 +3,9 @@ package com.its.springsecurity.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.its.springsecurity.dto.PlayerDTO;
+import com.its.springsecurity.dto.SquadDTO;
 import com.its.springsecurity.service.PlayerService;
+import com.its.springsecurity.service.SquadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlayerController {
     private final PlayerService playerService;
+    private final SquadService squadService;
 
 
 
@@ -42,15 +45,21 @@ public class PlayerController {
         return "FootballPlayer";
     }
 
-    @PostMapping("/api/players")
-    public String playerSave(@RequestBody PlayerDTO playerDTO){
-        playerService.save(playerDTO);
-        return "FootballPlayer";
+
+
+    @GetMapping("/allStar")
+    public String allStar(Model model){
+        List<PlayerDTO> players = playerService.findAll();
+        model.addAttribute("players",players);
+        return "AllStar";
     }
 
-
-
-
+    @GetMapping("/findAll")
+    public String findAll (Model model){
+     List<PlayerDTO> playerList = playerService.findAll();
+        model.addAttribute("playerList",playerList);
+        return "StarList";
+    }
 
 
 }

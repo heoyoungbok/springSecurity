@@ -114,19 +114,12 @@ public class PlayerService {
     }
 
     public void save(PlayerDTO playerDTO) {
-     playerRepository.save(PlayerEntity.toSaveEntity(playerDTO));
-
+        playerRepository.save(PlayerEntity.toSaveEntity(playerDTO));
     }
 
-//    public List<PlayerDTO> findUrls() {
-//        List<PlayerEntity> playerEntityList = playerRepository.findAll();
-//        List<PlayerDTO> playerDTOList = playerEntityList.stream()
-//                .map(PlayerDTO::plDTO)
-//                .collect(Collectors.toList());
-//        return playerDTOList;
-//    }
 
-//    public List<String> findUrls() {
-//        return playerRepository.findByUrlNotNull();
+//    public PlayerDTO findById(Long id) {
+//
+//
 //    }
 }

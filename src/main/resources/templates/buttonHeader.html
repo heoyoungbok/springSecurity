@@ -8,6 +8,56 @@
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 </head>
     <style>
+        /**{padding:0;margin:0}*/
+        /*li{list-style:none}*/
+        a{
+            font-size:20px
+
+            }
+        /*.tab{*/
+        /*    color: #1a1e21;*/
+        /*}*/
+        .menu {
+            /*width: 800px;*/
+            overflow: hidden;
+            /*margin: 150px auto;*/
+            text-align: center;
+
+
+        }
+
+        .menu > li {
+            width: 20%; /*20*5=100%*/
+            float: left;
+            text-align: center;
+            line-height: 40px;
+            background-color: #fff;
+        }
+
+        .menu a {
+            color: #1a1e21;
+        }
+
+        .submenu > li {
+            line-height: 50px;
+            background-color: #fff
+        }
+
+        .submenu {
+            height: 0; /*ul의 높이를 안보이게 처리*/
+            overflow: hidden;
+        }
+
+
+        .menu > li:hover {
+            /*background-color: #94a9ff;*/
+            transition-duration: 0.5s;
+        }
+
+        .menu > li:hover .submenu {
+            height: 250px; /*서브메뉴 li한개의 높이 50*5*/
+            transition-duration: 1s;
+        }
 
         body:before{
             content:'';
@@ -61,17 +111,48 @@
         }
     </style>
 <body>
-<div class="container dropdown">
-    <button href="#" th:onclick="|location.href='@{/craw}'|" data-no="0" class="active">프리미어리그</button>
-    <button href="#" th:onclick="|location.href='@{/l2}'|" data-no="1" class="active">프리메라리그</button>
-    <button href="#" th:onclick="|location.href='@{/l3}'|" data-no="2" class="active">분데스리가</button>
-    <button href="#" th:onclick="|location.href='@{/l4}'|" data-no="3" class="active">세리에A</button>
-    <button href="#" th:onclick="|location.href='@{/l5}'|" data-no="4" class="active">에레디비시</button>
-    <button href="#" th:onclick="|location.href='@{/l6}'|" data-no="5" class="active">리그앙</button>
 
-</div>
-<span class="mx-3">{{user}}님 안녕하세요!</span>
+<body>
+<ul class="menu">
+    <li>
+        <a href="#">수상 정보</a>
+        <ul class="submenu">
+            <button href="#" th:onclick="|location.href='@{}'|" data-no="0" class="active">월드컵 MVP</button>
+            <button href="#" th:onclick="|location.href='@{}'|" data-no="0" class="active">월드컵 영플레이어</button>
+            <button href="#" th:onclick="|location.href='@{}'|" data-no="0" class="active">TOTY 소식</button>
+        </ul>
+    </li>
+    <li>
+        <a href="#">리그 정보</a>
+        <ul class="submenu">
+            <div class="container dropdown">
+                <button href="#" th:onclick="|location.href='@{/craw}'|" data-no="0" class="active">프리미어리그</button>
+                <button href="#" th:onclick="|location.href='@{/l2}'|" data-no="1" class="active">프리메라리그</button>
+                <button href="#" th:onclick="|location.href='@{/l3}'|" data-no="2" class="active">분데스리가</button>
+                <button href="#" th:onclick="|location.href='@{/l4}'|" data-no="3" class="active">세리에A</button>
+                <button href="#" th:onclick="|location.href='@{/l5}'|" data-no="4" class="active">에레디비시</button>
+                <button href="#" th:onclick="|location.href='@{/l6}'|" data-no="5" class="active">리그앙</button>
+            </div>
+        </ul>
+    </li>
+    <li>
+        <a href="#">커뮤니티</a>
+        <ul class="submenu">
+            <li><a href="#">게시판</a></li>
+            <li><a href="#"></a></li>
+<!--            <li><a href="#">submenu03</a></li>-->
+<!--            <li><a href="#">submenu04</a></li>-->
+<!--            <li><a href="#">submenu05</a></li>-->
+        </ul>
+    </li>
 
+
+
+
+
+</ul>
+</ul>
+</body>
 </body>
 </th:block>
     <script>

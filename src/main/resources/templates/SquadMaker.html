@@ -21,7 +21,9 @@
         }
 
 
+
         #ST-position{
+
             background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
             height: 200px;
             background-repeat:no-repeat;
@@ -31,6 +33,7 @@
             left: 840px;
             width: 10%;
             position: relative;
+            text-align: center;
 
         }
 
@@ -45,7 +48,7 @@
             left: 535px;
             width: 10%;
             position: relative;
-
+            text-align: center;
         }
 
 
@@ -59,10 +62,8 @@
             left: 1145px;
             width: 10%;
             position: relative;
-
+            text-align: center;
         }
-
-
 
 
         #GK-position{
@@ -72,8 +73,10 @@
             background-position:center;
             background-size: contain;
             top: -1250px;
-            right: 8px;
+            left: 850px;
+            width: 10%;
             position: relative;
+            text-align: center;
         }
         #LM-position{
             background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
@@ -85,6 +88,7 @@
             left: 620px;
             width: 10%;
             position: relative;
+            text-align: center;
         }
         #RM-position{
             background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
@@ -96,6 +100,7 @@
             left: 1059px;
             width: 10%;
             position: relative;
+            text-align: center;
         }
         #CM-position{
             background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
@@ -107,6 +112,7 @@
             left:  845px;
             width: 10%;
             position: relative;
+            text-align: center;
         }
 
         #LCB-position{
@@ -119,6 +125,7 @@
             left: 600px;
             width: 10%;
             position: relative;
+            text-align: center;
         }
         #RCB-position{
             background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
@@ -130,6 +137,7 @@
             left: 1080px;
             width: 10%;
             position: relative;
+            text-align: center;
         }
         #LB-position{
             background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
@@ -141,6 +149,7 @@
             left: 200px;
             width: 10%;
             position: relative;
+            text-align: center;
         }
         #RB-position{
             background-image: url("https://static.wefut.com/assets/images/fut15/gold12.png?205");
@@ -152,6 +161,7 @@
             left: 1500px;
             width: 10%;
             position: relative;
+            text-align: center;
         }
 
     </style>
@@ -159,87 +169,85 @@
 <body>
 
 <div class="table-hover">
-   <input type="button" value="스쿼드 저장" onclick="savePlayerData()">
 <div class="container">
     <div class="container-1">
         <div class="position" id="ST-position" onclick="openPlayerWindow('ST')">
-            <div id="ST-name"></div>
             <img id="ST-image">
+            <div id="ST-name"></div>
         </div>
     </div>
 
     <div class="container-2">
     <div class="position" id="LW-position" onclick="openPlayerWindow('LW')">
-        <div id="LW-name"></div>
         <img id="LW-image">
+        <div id="LW-name"></div>
     </div>
     </div>
 
     <div class="container-3">
     <div class="position" id="RW-position" onclick="openPlayerWindow('RW')">
-        <div id="RW-name"></div>
         <img id="RW-image">
+        <div id="RW-name"></div>
     </div>
     </div>
 
     <div class="container-4">
     <div class="position" id="LM-position" onclick="openPlayerWindow('LM')">
-        <div id="LM-name"></div>
         <img id="LM-image">
+        <div id="LM-name"></div>
     </div>
     </div>
 
     <div class="container-5">
     <div class="position" id="RM-position" onclick="openPlayerWindow('RM')">
-        <div id="RM-name"></div>
         <img id="RM-image">
+        <div id="RM-name"></div>
     </div>
     </div>
 
     <div class="container-6">
     <div class="position" id="CM-position" onclick="openPlayerWindow('CM')">
-        <div id="CM-name"></div>
         <img id="CM-image">
+        <div id="CM-name"></div>
     </div>
     </div>
 
     <div class="container-7">
     <div class="position" id="LCB-position" onclick="openPlayerWindow('LCB')">
-        <div id="LCB-name"></div>
         <img id="LCB-image">
+        <div id="LCB-name"></div>
     </div>
     </div>
 
     <div class="container-8">
     <div class="position" id="RCB-position" onclick="openPlayerWindow('RCB')">
-        <div id="RCB-name"></div>
         <img id="RCB-image">
+        <div id="RCB-name"></div>
     </div>
     </div>
 
     <div class="container-9">
     <div class="position" id="RB-position" onclick="openPlayerWindow('RB')">
-        <div id="RB-name"></div>
         <img id="RB-image">
+        <div id="RB-name"></div>
     </div>
     </div>
 
     <div class="container-10">
     <div class="position" id="LB-position" onclick="openPlayerWindow('LB')">
-        <div id="LB-name"></div>
         <img id="LB-image">
+        <div id="LB-name"></div>
     </div>
     </div>
     <div class="container-11">
     <div class="position" id="GK-position" onclick="openPlayerWindow('GK')">
-        <div id="GK-name"></div>
         <img id="GK-image">
+        <div id="GK-name"></div>
     </div>
     </div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
 </body>
 
 
@@ -314,92 +322,124 @@
 
         }
     }
-    const savePlayerData = (name, image, position) => {
-        axios.post('/api/players', {
-            name: name,
-            image: image,
-            position: position
-        })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+    $( function() {
+    $( "#ST-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#LW-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#RW-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#LM-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#RM-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#CM-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#LCB-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#RCB-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#RB-position" ).draggable();
+    } );
+
+    $( function() {
+        $( "#LB-position" ).draggable();
+    } );
+    $( function() {
+        $( "#GK-position" ).draggable();
+    } );
+
+
+    // <!--    //-->
+    // <!--    //     $( "#ST" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    //
+    // <!--    // function previewFile() {-->
+    // <!--    //     var file    = document.querySelector('#input-img').files[0];-->
+    // <!--    //     var path = file.name;-->
+    // <!--    //     /* You can now use the path variable to set the background-image property */-->
+    // <!--    //     $("#ST").css("background-image", "url(@{/static/img/"+path+"})");-->
+    // <!--    // }-->
+    //
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#CAM" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#CDM" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#CB" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#SW" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#RB" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );    $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#LB" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#LWB" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#RWB" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#LW" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#RW" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+    // <!--    //-->
+    // <!--    // $( function() {-->
+    // <!--    //-->
+    // <!--    //     $( "#CM" ).draggable();-->
+    // <!--    //-->
+    // <!--    // } );-->
+
+
 </script>
 
 
 
 
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#ST" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-
-<!--    // function previewFile() {-->
-<!--    //     var file    = document.querySelector('#input-img').files[0];-->
-<!--    //     var path = file.name;-->
-<!--    //     /* You can now use the path variable to set the background-image property */-->
-<!--    //     $("#ST").css("background-image", "url(@{/static/img/"+path+"})");-->
-<!--    // }-->
-
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#CAM" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#CDM" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#CB" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#SW" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#RB" ).draggable();-->
-<!--    //-->
-<!--    // } );    $( function() {-->
-<!--    //-->
-<!--    //     $( "#LB" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#LWB" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#RWB" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#LW" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#RW" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
-<!--    //-->
-<!--    // $( function() {-->
-<!--    //-->
-<!--    //     $( "#CM" ).draggable();-->
-<!--    //-->
-<!--    // } );-->
 
 
 

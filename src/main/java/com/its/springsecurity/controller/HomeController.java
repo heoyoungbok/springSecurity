@@ -44,6 +44,16 @@ public class HomeController {
         return "SquadMaker";
     }
 
+    @GetMapping("/wcMvp")
+    public String wcMvP(){
+        return "WcMvp";
+    }
+
+    @GetMapping("/wcYp")
+    public String wcYp(){
+        return "WcYoung";
+    }
+
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 //@Autowired

@@ -24,9 +24,6 @@ public class PlayerDTO {
 
 
 
-
-
-
 //    for ( : players) {
 //        Long id = player.getId();
 //        String name = player.getName();
@@ -54,7 +51,7 @@ public class PlayerDTO {
 //
 //    }
 
-    public static  PlayerDTO plDTO(PlayerEntity playerEntity){
+    public static PlayerDTO plDTO(PlayerEntity playerEntity){
         PlayerDTO playerDTO = new PlayerDTO();
         playerDTO.setId(playerEntity.getId());
         playerDTO.setName(playerEntity.getName());
@@ -67,4 +64,12 @@ public class PlayerDTO {
         return playerDTO;
     }
 
+    public static PlayerEntity toSaveEntity(PlayerDTO playerDTO) {
+        PlayerEntity playerEntity = new PlayerEntity();
+        playerEntity.setName(playerDTO.getName());
+        playerEntity.setPosition(playerDTO.getPosition());
+        playerEntity.setImageUrl(playerDTO.getImageUrl());
+        playerEntity.setTitle(playerDTO.getTitle());
+        return playerEntity;
+    }
 }

@@ -166,10 +166,13 @@
 
     </style>
 </head>
+<th:block th:replace="buttonHeader :: header"></th:block>
 <body>
 
 <div class="table-hover">
 <div class="container">
+  <input type="text">
+    <input type="submit" value="스쿼드 저장" onclick="squadSave()">
     <div class="container-1">
         <div class="position" id="ST-position" onclick="openPlayerWindow('ST')">
             <img id="ST-image">
@@ -365,74 +368,28 @@
         $( "#GK-position" ).draggable();
     } );
 
+    function squadSave() {
+        var squadNameInput = document.getElementById("squadNameInput");
+        var squadName = squadNameInput ? squadNameInput.value : '';
 
-    // <!--    //-->
-    // <!--    //     $( "#ST" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    //
-    // <!--    // function previewFile() {-->
-    // <!--    //     var file    = document.querySelector('#input-img').files[0];-->
-    // <!--    //     var path = file.name;-->
-    // <!--    //     /* You can now use the path variable to set the background-image property */-->
-    // <!--    //     $("#ST").css("background-image", "url(@{/static/img/"+path+"})");-->
-    // <!--    // }-->
-    //
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#CAM" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#CDM" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#CB" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#SW" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#RB" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );    $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#LB" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#LWB" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#RWB" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#LW" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#RW" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
-    // <!--    //-->
-    // <!--    // $( function() {-->
-    // <!--    //-->
-    // <!--    //     $( "#CM" ).draggable();-->
-    // <!--    //-->
-    // <!--    // } );-->
+        var STName = document.getElementById("ST-name");
+        var STImage = document.getElementById("ST-image");
+        if (STName && STImage) {
+            squadData.ST = { name: STName.innerHTML, image: STImage.src };
+        }
+        });
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/saveSquad", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response from the controller
+            }
+        };
+        xhr.send(JSON.stringify({ squadName: squadName, squadData: squadData}));
+    }
+
+
 
 
 </script>

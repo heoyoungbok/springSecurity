@@ -4,23 +4,39 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    html {
+        background-image: url('/img/슛.gif');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    html, body {
+        height: 100vh;
+    }
+
+        /*display: grid;*/
+        /*place-items: center;*/
+        /*text-align: center;*/
+        /*!*height: 100vh*!*/
+
+</style>
 <body>
+<h1>클릭 하시면 메인으로 이동됩니다</h1>
 <!--<a href="/craw">크롤링 출력</a>-->
-<a href="/login">회원가입</a>
-<a href="/wcMvp">1</a>
-<a href="/craw">2</a>
+
 <!--<a href="/l6">test</a>-->
 <!--<a href="/player">선수정보</a>-->
 <!--<a href="/squad">스쿼드</a>-->
 
 </body>
 <script>
-    // document.addEventListener('click',function (event){
-    //     const target = event.target;
-    //     setTimeout(function() {
-    //         // redirect to '/home' after 3 seconds
-    //         window.location.href = '/home';
-    //     }, 3000);
-    // });
+    document.addEventListener('click',function (event){
+        const target = event.target;
+        setTimeout(function() {
+            // redirect to '/home' after 3 seconds
+            window.location.href = '/index2';
+        }, 3000);
+    });
 </script>
 </html>

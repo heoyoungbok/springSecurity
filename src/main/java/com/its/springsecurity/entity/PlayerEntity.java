@@ -31,11 +31,6 @@ public class PlayerEntity {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "squad_id")
-    private SquadEntity squad;
-
-//
 
 
     public static PlayerEntity toSaveEntity(PlayerDTO playerDTO){
@@ -47,15 +42,6 @@ public class PlayerEntity {
 
 
         return playerEntity;
-    }
-    public static PlayerDTO plDTO(PlayerEntity playerEntity) {
-        PlayerDTO playerDTO = new PlayerDTO();
-        playerDTO.setId(playerEntity.getId());
-        playerDTO.setName(playerEntity.getName());
-        playerDTO.setPosition(playerEntity.getPosition());
-        playerDTO.setImageUrl(playerEntity.getImageUrl());
-        playerDTO.setTitle(playerEntity.getTitle());
-        return playerDTO;
     }
 
 

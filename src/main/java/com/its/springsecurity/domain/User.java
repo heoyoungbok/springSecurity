@@ -2,16 +2,19 @@ package com.its.springsecurity.domain;
 
 
 import com.its.springsecurity.domain.user.Role;
+import com.its.springsecurity.domain.user.UserDTO;
 import com.its.springsecurity.entity.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 public class User extends BaseTimeEntity {
@@ -25,6 +28,7 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String email;
 
+    private String password;
     @Column
     private String picture;
 
@@ -35,6 +39,8 @@ public class User extends BaseTimeEntity {
     public User() {
 
     }
+
+
 
 
     public User update(String name, String picture) {
@@ -51,5 +57,19 @@ public class User extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public static User toSaveEntity(UserDTO userDTO){
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        return user;
+
+    }
+
 
 }

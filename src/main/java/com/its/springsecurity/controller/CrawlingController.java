@@ -51,7 +51,7 @@ public class CrawlingController {
 //        model.addAttribute("imageUrls",imageUrls);
 
 
-        return "LeagueOne";
+        return "League/LeagueOne";
     }
 //    @GetMapping("/l2")
 //    public String l2Form(){
@@ -85,7 +85,7 @@ public class CrawlingController {
         String P20 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_4yg9ttzw0m51048doksv8uq5r.png";
         List<String> imageUrls = Arrays.asList(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20); //리스트에 담아줌
         model.addAttribute("imageUrls",imageUrls);
-        return "LeagueTwo";
+        return "League/LeagueTwo";
 
     }
 
@@ -119,7 +119,7 @@ public class CrawlingController {
 
         List<String> imageUrls = Arrays.asList(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18);
         model.addAttribute("imageUrls",imageUrls);
-        return "LeagueThree";
+        return "League/LeagueThree";
     }
 
 
@@ -150,7 +150,7 @@ public class CrawlingController {
         String P20 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_ap6blbxhq9elm62vw6tutzlwg.png";
         List<String> imageUrls = Arrays.asList(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20);
                 model.addAttribute("imageUrls",imageUrls);
-        return "LeagueFour";
+        return "League/LeagueFour";
 
 
     }
@@ -182,7 +182,7 @@ public class CrawlingController {
 
         List<String> imageUrls = Arrays.asList(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18);
         model.addAttribute("imageUrls",imageUrls);
-        return "LeagueFive";
+        return "League/LeagueFive";
 
 
     }
@@ -215,7 +215,7 @@ public class CrawlingController {
         String P20 = "https://secure.cache.images.core.optasports.com/soccer/teams/30x30/uuid_75qj99fhg5c0ztj2tva5u4uii.png";
         List<String> imageUrls = Arrays.asList(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20);
         model.addAttribute("imageUrls",imageUrls);
-        return "LeagueSix";
+        return "League/LeagueSix";
 
 
 

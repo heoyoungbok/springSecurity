@@ -29,7 +29,7 @@ public class HomeController {
 
     @GetMapping("/squad")
     public String squad() {
-        return "SquadMaker";
+        return "SquadMake/SquadMaker";
     }
 
     @GetMapping("/wcMvp")

@@ -6,6 +6,9 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    <script th:src="@{/js/jquery.mim.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
     <style>
         /**{padding:0;margin:0}*/
@@ -143,10 +146,13 @@
             <button href="#" th:onclick="|location.href='@{/board/save}'|" data-no="0" class="active">게시판 작성</button>
             <button href="#" th:onclick="|location.href='@{/board/}'|" data-no="0" class="active">게시판 목록</button>
             <button href="#" th:onclick="|location.href='@{/squad}'|" data-no="0" class="active">스쿼드 메이커</button>
-            <li><a href="#"></a></li>
-<!--            <li><a href="#">submenu03</a></li>-->
-<!--            <li><a href="#">submenu04</a></li>-->
-<!--            <li><a href="#">submenu05</a></li>-->
+            <button class="playlistSelection" value="0">Playlist 1</button>
+            <button class="playlistSelection" value="1">Playlist 2</button>
+
+            <audio id="player" src=""></audio>
+
+            <ul id="playlist">
+            </ul>
         </ul>
     </li>
     <li>
@@ -198,6 +204,79 @@
 
 
         }
+
+        var playlists = [
+            {
+                name: "Playlist 1",
+                songs: [
+                    {
+                        title: "Song 1",
+                        url: "https://youtu.be/XmnFx4cjVks"
+                    },
+                    {
+                        title: "Song 2",
+                        url: "https://youtu.be/hc90yDhvskc"
+                    },
+
+                ]
+            },
+            {
+                name: "Playlist 2",
+                songs: [
+                    {
+                        title: "Song 3",
+                        url: "https://youtu.be/CuMlZ45jNY0"
+                    },
+                    {
+                        title: "Song 4",
+                        url: " https://youtu.be/jMWAl1AIJBY"
+                    },
+
+                ]
+            },
+
+        ];
+
+
+        function generatePlaylistHTML(playlist) {
+            var playlistHTML = "";
+            for (var i = 0; i < playlist.songs.length; i++) {
+                var song = playlist.songs[i];
+                playlistHTML += "<li>" + song.title + "</li>";
+            }
+            return playlistHTML;
+        }
+
+
+        function changePlaylist(playlistIndex) {
+            var selectedPlaylist = playlists[playlistIndex];
+            var playlistHTML = generatePlaylistHTML(selectedPlaylist);
+            $("#playlist").html(playlistHTML);
+        }
+g
+        function playSong(songIndex) {
+            var selectedSong = playlists[currentPlaylistIndex].songs[songIndex];
+            $("#player").attr("src", selectedSong.url);
+            $("#player")[0].play();
+        }
+
+
+        var currentPlaylistIndex = 0;
+        changePlaylist(currentPlaylistIndex);
+
+
+        $("#playlistSelection").change(function() {
+            currentPlaylistIndex = $(this).val();
+            changePlaylist(currentPlaylistIndex);
+        });
+
+
+        $("#playlist").click(function(event) {
+            var selectedSongIndex = $(event.target).index();
+            playSong(selectedSongIndex);
+        });
+
+
     </script>
 </th:block>
 </html>

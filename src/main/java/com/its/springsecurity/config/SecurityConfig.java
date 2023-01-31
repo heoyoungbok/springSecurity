@@ -26,11 +26,11 @@ public class SecurityConfig {
                 .and()
                 .oauth2Login()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/");
 
 
 //                .baseUri("/oauth2/code/*")
-        ;
+
 
         return http.build();
     }
